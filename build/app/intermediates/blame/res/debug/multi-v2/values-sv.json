@@ -4,7 +4,7 @@
             "outputFile": "/Users/admin/Desktop/FLUTTER/pistom_loja/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-sv/values-sv.xml",
             "map": [
                 {
-                    "source": "/Users/admin/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-16.1.0.aar/6898607f76e6303943d7f3281238a404/res/values-sv/values.xml",
+                    "source": "/Users/admin/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-17.0.0.aar/ba21a6d3e14e03d86780ec68543dc461/res/values-sv/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "/Users/admin/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/4a97a7e20bac53af560bf80dd7e54602/res/values-sv/values.xml",
+                    "source": "/Users/admin/.gradle/caches/transforms-1/files-1.1/play-services-base-17.1.0.aar/3945b662dacd3cb85fb2f78b6cb2220d/res/values-sv/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",

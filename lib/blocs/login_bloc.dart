@@ -18,7 +18,7 @@ class LoginBloc extends BlocBase with LoginValidators {
   Stream<String> get outPassword => _passwordController.stream.transform(validatePassword);
   Stream<LoginState> get outState => _stateController.stream;
 
-  Stream<bool> get outSubmitValid => Observable.combineLatest2(
+  Stream<bool> get outSubmitValid => Rx.combineLatest2(
       outEmail, outPassword, (a, b) => true
   );
 

@@ -4,6 +4,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:gerente_loja/blocs/orders_bloc.dart';
 import 'package:gerente_loja/blocs/quote_bloc.dart';
 import 'package:gerente_loja/blocs/user_bloc.dart';
+import 'package:gerente_loja/tabs/chat_tab.dart';
 import 'package:gerente_loja/tabs/orders_tab.dart';
 import 'package:gerente_loja/tabs/products_tab.dart';
 import 'package:gerente_loja/tabs/profile_tab.dart';
@@ -55,7 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ),
         child: BottomNavigationBar(
+          unselectedItemColor: Colors.amber,
           currentIndex: _page,
+          selectedItemColor: Colors.amber,
           onTap: (p){
             _pageController.animateToPage(
                 p,
@@ -73,13 +76,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Text("Pedidos")
             ),
             BottomNavigationBarItem(
+                icon: Icon(Icons.chat),
+                title: Text("Mensagens")
+            ),
+            BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline),
                 title: Text("Perfil")
             ),
-           /* BottomNavigationBarItem(
-                icon: Icon(Icons.directions_car),
-                title: Text("Minhas Peças")
-            )*/
           ]
         ),
       ),
@@ -97,10 +100,9 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               children: <Widget>[
                 QuotesTab(),
-                Container(color: Colors.redAccent,),
-                //OrdersTab(),
+                OrdersTab(),
+                ChatTab(),
                 ProfileTab(),
-              /*  ProductsTab()*/
               ],
             ),
           ),

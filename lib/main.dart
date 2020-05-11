@@ -1,8 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gerente_loja/screens/home_screen.dart';
 import 'package:gerente_loja/screens/login_screen.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(
+    
+    //Firestore.instance.collection('').document('doc').setData({"texto":"daniel"});
+    
+    MyApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -10,7 +15,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'PISTOM',
       theme: ThemeData(
-        primaryColor: Colors.blueGrey
+        primaryColor: Colors.blueGrey,
+        iconTheme: IconThemeData(
+          color: Colors.blue
+        )
       ),
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),

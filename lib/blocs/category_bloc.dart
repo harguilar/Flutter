@@ -25,7 +25,7 @@ class CategoryBloc extends BlocBase {
   Stream get outImage => _imageController.stream;
   Stream<bool> get outDelete => _deleteController.stream;
 
-  Stream<bool> get submitValid => Observable.combineLatest2(
+  Stream<bool> get submitValid => Rx.combineLatest2(
     outTitle, outImage, (a, b) => true
   );
 

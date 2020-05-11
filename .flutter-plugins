@@ -1,7 +1,14 @@
 # This is a generated file; do not edit or check into version control.
-cloud_firestore=/Users/admin/Desktop/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-0.9.8/
-firebase_auth=/Users/admin/Desktop/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-0.8.3/
-firebase_core=/Users/admin/Desktop/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.3.1+1/
-firebase_storage=/Users/admin/Desktop/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_storage-2.1.0+1/
+cloud_firestore=/Users/admin/Desktop/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-0.13.5/
+cloud_firestore_web=/Users/admin/Desktop/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_web-0.1.1+2/
+firebase_auth=/Users/admin/Desktop/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-0.15.5+3/
+firebase_auth_web=/Users/admin/Desktop/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-0.1.2/
+firebase_core=/Users/admin/Desktop/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.4.4+3/
+firebase_core_web=/Users/admin/Desktop/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-0.1.1+2/
+firebase_storage=/Users/admin/Desktop/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_storage-3.1.5/
+flutter_plugin_android_lifecycle=/Users/admin/Desktop/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-1.0.7/
+fluttertoast=/Users/admin/Desktop/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-4.0.1/
+google_sign_in=/Users/admin/Desktop/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-4.4.4/
+google_sign_in_web=/Users/admin/Desktop/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_web-0.9.1/
 image_cropper=/Users/admin/Desktop/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/image_cropper-1.0.0/
-image_picker=/Users/admin/Desktop/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.5.0+9/
+image_picker=/Users/admin/Desktop/FLUTTER/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.6.6+1/
