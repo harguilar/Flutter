@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gerente_loja/screens/home_screen.dart';
-import 'package:gerente_loja/screens/login_screen.dart';
+import 'package:gerente_loja/screens/signup_screen.dart';
+import 'package:gerente_loja/widgets/auth_service.dart';
 
 void main() => runApp(
     
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         )
       ),
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: AuthService().handleAuth(),
       //LoginScreen(),
     );
   }

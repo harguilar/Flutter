@@ -53,12 +53,20 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:680609448660:android:fc6c745397e1dbd1bff141",
+        "mobilesdk_app_id": "1:680609448660:android:d771c65aa6469554bff141",
         "android_client_info": {
           "package_name": "com.pistom.pistom_loja"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "680609448660-9jheunrjpd2uk1jv1es809qiiscep0s0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pistom.pistom_loja",
+            "certificate_hash": "6539280678b73b6b41893ab00e177035cc49775a"
+          }
+        },
         {
           "client_id": "680609448660-b7vldcavq1p798r9uaqjojifnmnoacft.apps.googleusercontent.com",
           "client_type": 3

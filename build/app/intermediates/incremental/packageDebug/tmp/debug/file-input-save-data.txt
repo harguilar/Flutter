@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sun May 10 22:24:38 WAT 2020
+#Mon May 11 19:51:46 WAT 2020
 4.path=flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
 13.baseType=DIRECTORY
 8.set=ASSET

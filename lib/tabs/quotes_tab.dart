@@ -18,7 +18,7 @@ class QuotesTab extends StatelessWidget {
 
       ),
       body: FutureBuilder<QuerySnapshot>(
-          future: Firestore.instance.collection("quotes").getDocuments(),
+          future: Firestore.instance.collection("proformas").getDocuments(),
           builder: (context, snapshot) {
             if (!snapshot.hasData)
               return Center(

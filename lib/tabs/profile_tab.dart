@@ -84,7 +84,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                   ),
                                 )),*/
                             SizedBox(height: 25.0),
-                            Container(
+                        /*    Container(
                                 height: 30.0,
                                 width: 150.0,
                                 child: Material(
@@ -102,7 +102,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                     ),
                                   ),
                                 )),
-                            SizedBox(height: 25.0),
+                            SizedBox(height: 25.0),*/
                             Container(
                                 height: 30.0,
                                 width: 95.0,

@@ -18,8 +18,9 @@ class Reply{
 
 
   Map<String, dynamic> _ReplyToJson(Reply instance) => <String, dynamic> {
+    'vendorId' : instance.vendorId,
     'vendorName': instance.vendorName,
-    'date': instance.data,
+    'data': instance.data,
     'brandNew': instance.brandNew,
     'price': instance.price,
   };
@@ -40,8 +41,9 @@ class Reply{
 
 
   Reply.fromDocument(DocumentSnapshot snapshot){
+    vendorId=snapshot.data['vendorId'];
     vendorName=snapshot.data['vendorName'];
-    data = snapshot.data['date'];
+    data = snapshot.data['data'].toDate();
     brandNew =snapshot.data['brandNew'];
     price = snapshot.data['price'];
   }

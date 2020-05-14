@@ -75,10 +75,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 icon: Icon(Icons.shopping_cart),
                 title: Text("Pedidos")
             ),
-            BottomNavigationBarItem(
+           /* BottomNavigationBarItem(
                 icon: Icon(Icons.chat),
                 title: Text("Mensagens")
-            ),
+            ),*/
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_outline),
                 title: Text("Perfil")
@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: <Widget>[
                 QuotesTab(),
                 OrdersTab(),
-                ChatTab(),
+                //ChatTab(),
                 ProfileTab(),
               ],
             ),

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
-import 'package:gerente_loja/datas/quote_data.dart';
+import 'package:gerente_loja/datas/proforma_model.dart';
 import 'package:gerente_loja/datas/reply_data.dart';
 import 'package:gerente_loja/repository/data_repository.dart';
 
@@ -27,34 +27,43 @@ class _QuoteScreenState extends State<QuoteScreen> {
   FirebaseUser firebaseUser;
   bool hideReplyFields= false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  Map<String ,dynamic> dt =Map<String, dynamic>();
   
 
 
-  bool _alreadyRepliedToQuote(List<Reply> list){
+ Future<void> _alreadyRepliedToQuote  (DocumentSnapshot documentSnapshot)async{
 
-    if(list == null )
-        return false;
+   QuerySnapshot _docList;
 
-   return list.firstWhere( (e)=> e.vendorId =='fWVNRbqtLJV619O9O4txhcCpyzE3', orElse:null)
-       !=null  ? true :false ;
+     _docList = await Firestore.instance.collection('proformas').document(documentSnapshot.documentID)
+        .collection('replies').where("vendorId", isEqualTo: "fWVNRbqtLJV619O9O4txhcCpyzE3").getDocuments();
 
+   hideReplyFields =(_docList.documents.length>1) ;
+
+        
   }
 
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
 
 
-    QuoteData quote =QuoteData.fromDocument(widget.snapshot);
+    ProformaModel proformaModel =ProformaModel.fromDocument(widget.snapshot);
+    dt=widget.snapshot.data;
 
-    hideReplyFields=_alreadyRepliedToQuote(quote.replies);
+
+      _alreadyRepliedToQuote(widget.snapshot);
+    
+    
+    for(int i=1;i<15;i++)
+    print(hideReplyFields);
 
 
     return Scaffold(
       key:  _scaffoldKey,
         appBar: AppBar(
-          title: Text('${ widget.snapshot.data['vehicle']} ',
+          title: Text('${ dt['marca']} ' +'${dt['modelo'] } '+ '${dt['ano'] }' +'${dt['motor']}',
             style: TextStyle(color: Colors.amber,fontWeight: FontWeight.bold),),
           centerTitle: true,
 
@@ -62,7 +71,8 @@ class _QuoteScreenState extends State<QuoteScreen> {
         ),
         body: ListView(
           children: [
-              AspectRatio(
+            Image.network(dt['imgUrl'])
+             /* AspectRatio(
             aspectRatio: 0.9,
             child:  Carousel(
               images: widget.snapshot.data['images'].map( (url){
@@ -74,7 +84,7 @@ class _QuoteScreenState extends State<QuoteScreen> {
               dotColor: Theme.of(context).primaryColor,
               autoplay: false,
             ),
-          )
+          )*/
             ,
             Padding(
               padding: EdgeInsets.all(16.0),
@@ -82,14 +92,14 @@ class _QuoteScreenState extends State<QuoteScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'Peça: ${ widget.snapshot.data['partName']}',
+                    'Peça: ${ dt['peca']}',
                     style:
                     TextStyle(fontSize: 22.0, fontWeight: FontWeight.w500),
                     maxLines: 3,
                   ),
                   SizedBox(height: 10,),
                   Text(
-                    widget.snapshot.data['vehicle'],
+                    dt['marca']+' '+dt['modelo']+' '+dt['motor'],
                     style:
                         TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
                     maxLines: 3,
@@ -102,7 +112,7 @@ class _QuoteScreenState extends State<QuoteScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Data: ${widget.snapshot.data['data']}',
+                        'Data: 08/05/2020',
                         style:
                             TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
                         maxLines: 3,
@@ -158,17 +168,19 @@ class _QuoteScreenState extends State<QuoteScreen> {
                       onPressed: () {
 
 
-                        quote.status='replied';
+                        proformaModel.estado=2;
 
                         Reply reply =Reply(
                             vendorId: 'fWVNRbqtLJV619O9O4txhcCpyzE3'/*firebaseUser.uid*/,
                             vendorName: 'Samuel Jackson',
                             data: DateTime.now(),
                             brandNew: _status==PartStatus.nova ? true:false ,
-                            price: double.parse(_priceTextFiledController.text));
+                            price: double.parse(_priceTextFiledController.text)
+                        );
 
-                        quote.replies.add(reply);
-                        repository.updateQuote(quote);
+
+                        repository.updateQuote(proformaModel);
+                        repository.addReply(reply, proformaModel);
 
 
                         _scaffoldKey.currentState.showSnackBar(SnackBar(

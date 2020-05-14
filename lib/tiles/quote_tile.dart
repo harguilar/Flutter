@@ -10,23 +10,25 @@ class QuoteTile extends StatelessWidget {
   QuoteTile(this.snapshot);
 
 
+
   @override
   Widget build(BuildContext context) {
+    Map<String ,dynamic> dt=snapshot.data;
 
     return ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         leading: Container(
-          padding: EdgeInsets.only(right: 12.0),
+          padding: EdgeInsets.only(right: 4.0),
+          width: 80.0,
           decoration: new BoxDecoration(
               border: new Border(
                   right: new BorderSide(width: 1.0, color: Colors.white24))),
           child: Image.network(
-            snapshot.data['images'][0],
+            snapshot.data['imgUrl'],
             fit: BoxFit.cover,
           )
         ),
-        title: Text(
-          snapshot.data['vehicle'],
+        title: Text('${ dt['marca']} ' +'${dt['modelo'] } '+ '${dt['ano'] }',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
@@ -34,7 +36,9 @@ class QuoteTile extends StatelessWidget {
         subtitle: Row(
           children: <Widget>[
             Icon(Icons.linear_scale, color: Colors.yellowAccent),
-            Text(snapshot.data['partName'], style: TextStyle(color: Colors.white))
+            Text(snapshot.data['peca'], style: TextStyle(color: Colors.white),
+            maxLines: 2,
+            )
           ],
         ),
         onTap: (){
