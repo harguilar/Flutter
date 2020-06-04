@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jeilaonlinestore/screens/login_screen.dart';
+import 'package:jeilaonlinestore/screens/signup_screen.dart';
 import 'package:jeilaonlinestore/tiles/drawer_tile.dart';
 
 //This Class Controls The Page.
@@ -73,6 +75,7 @@ class CustomDrawer extends StatelessWidget {
                             ),
                             onTap: (){
                               //This is a Function of Gesture Detector.
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginScreen()));
                             },
                           ),
                         ],

@@ -41,12 +41,13 @@ class HomeTab extends StatelessWidget {
               ),
               FutureBuilder <QuerySnapshot>(
                 //Get the Documents and Order by the Position.
-                future: Firestore.instance
-                    .collection("home").orderBy('pos').getDocuments(),
+                future: Firestore.instance.collection('home').orderBy('pos').getDocuments(),
+               // future: Firestore.instance
+                 //   .collection("home").orderBy('pos').getDocuments(),
                 //Builder will define what is in the screen depends upon what the future will be to me.
                 builder: (context, snapshot){
                   //Validate if SnapShot has data
-                  if(!snapshot.hasData)
+                  if(!snapshot.hasData) {
                     //if does not has data please Create  Progress indicator
                     return SliverToBoxAdapter(
 
@@ -54,10 +55,12 @@ class HomeTab extends StatelessWidget {
                         height: 200.0,
                         alignment: Alignment.center,
                         child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.white),
                         ),
                       ),
                     );
+                  }
                   else
                     return SliverStaggeredGrid.count(
                       //crossAxisCount Specify the columns you have

@@ -68,7 +68,6 @@ class CategoryScreen extends StatelessWidget {
                        return ProductTile('List', ProductData.fromDocument(snapshot.data.documents[index]));
                      }
                  ),
-
                 ],
               );
             }
