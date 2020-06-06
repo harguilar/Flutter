@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:jeilaonlinestore/models/user_model.dart';
 import 'package:jeilaonlinestore/screens/login_screen.dart';
 import 'package:jeilaonlinestore/screens/signup_screen.dart';
 import 'package:jeilaonlinestore/tiles/drawer_tile.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 //This Class Controls The Page.
 class CustomDrawer extends StatelessWidget {
@@ -52,33 +54,44 @@ class CustomDrawer extends StatelessWidget {
                     Positioned(
                       left: 0.0,
                       bottom: 0.0,
-                      child: Column(
-                        //This will align things a bit to the lef
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'Ola,',
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          //In order to create a text with link we create a Gesture Detector
-                          GestureDetector(
-                            child:  Text('Entre ou cadastra-se >',
-                              //This will Get the primary color we defined in the home.
-                              style: TextStyle (
-                                color: Theme.of(context).primaryColor,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.bold,
+                      child: ScopedModelDescendant <UserModel>(
+                        builder: (context, child, model){
+                          //print (model.isLoading);
+                          return Column(
+                            //This will align things a bit to the lef
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                //Check if someone is logged in.
+                                'Ola, ${!model.isLoggedIn() ? "" : (model.userData['name'])}',
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            onTap: (){
-                              //This is a Function of Gesture Detector.
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginScreen()));
-                            },
-                          ),
-                        ],
+                              //In order to create a text with link we create a Gesture Detector
+                              GestureDetector(
+                                child:  Text(
+                                  !model.isLoggedIn() ?
+                                  'Entre ou cadastra-se >' : "Sair",
+                                  //This will Get the primary color we defined in the home.
+                                  style: TextStyle (
+                                    color: Theme.of(context).primaryColor,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                onTap: (){
+                                  if (!model.isLoggedIn())
+                                    //This is a Function of Gesture Detector.
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LoginScreen()));
+                                 else
+                                   model.signOut();
+                                },
+                              ),
+                            ],
+                          );
+                        },
                       ),
                     ),
                   ],

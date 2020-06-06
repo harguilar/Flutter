@@ -10,6 +10,9 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formkey = GlobalKey<FormState>();
+
+  //Because we already have a scaffold key we must define global key to access anywhere.
+  final _scaffoldkey = GlobalKey<ScaffoldState>();
   //Define the Controllers to Get the Text.
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -18,6 +21,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //Now Put the Key under Scaffold.
+      key: _scaffoldkey,
       appBar: AppBar(
         title: Text('Sign Up',
           style: TextStyle(
@@ -28,6 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
       body: ScopedModelDescendant<UserModel>(
         builder: (context, child, model) {
+          //print (model.isLoading);
           if (model.isLoading)
             return Center (child: CircularProgressIndicator(),);
           return  Form(
@@ -46,7 +52,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 ),
                 SizedBox(height: 16.0),
-
                 TextFormField(
                   controller: _emailController,
                   decoration: InputDecoration(
@@ -57,7 +62,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     if (text.isEmpty || !text.contains('@'))
                       return "Invalid Email ";
                   },
-
                 ),
                 SizedBox(height: 16.0),
                 TextFormField(
@@ -71,7 +75,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return "Invalid Password";
                   },
                 ),
-
                 SizedBox(height: 16.0),
                 TextFormField(
                   controller: _addressController,
@@ -94,7 +97,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         'name': _nameController.text,
                         'email': _emailController.text,
                         'address': _addressController.text,
+
                       };
+                      //print (userData['name']);
                       //User Signing up
                       model.signUp(userData: userData,
                         pass: _passwdController.text,
@@ -123,8 +128,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
-  void _onSucess(){}
-  void _onFail(){}
+  void _onSucess(){
+    _scaffoldkey.currentState.showSnackBar(SnackBar
+      (content: Text("User created successfully"),
+      backgroundColor: Theme.of(context).primaryColor,
+      duration: Duration(seconds: 2),
+    ));
+    //Leave The main Screen After you finish creating the user.
+    Future.delayed(Duration(seconds: 2)).then((value) => Navigator.of(context).pop());
+
+  }
+  void _onFail(){
+      _scaffoldkey.currentState.showSnackBar(SnackBar
+      (content: Text("Fail To create User"),
+      backgroundColor: Colors.redAccent,
+      duration: Duration(seconds: 2),
+    ));
+  }
 
 }
 

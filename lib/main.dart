@@ -15,7 +15,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    //Define the Scopped Model and its Data Type.
+    //Define the Scopped Model and its Data Type
+    //To after the entire App we must also define scoped Model within The home
+    //of Our Page.
     return ScopedModel<UserModel>(
       //Now lets create a New user Model
       model: UserModel(), //This states that anything below user Model will have access to the class UserModel
