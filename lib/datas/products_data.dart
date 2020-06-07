@@ -24,4 +24,12 @@ class ProductData {
       print(e);
     }
   }
+  //Create the Resume of products that display in my requests.
+  Map<String, dynamic>productsResumed(){
+    return {
+      'title': title,
+      'description': description,
+      'price':price,
+    };
+  }
 }

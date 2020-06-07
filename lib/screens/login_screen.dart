@@ -29,6 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
           "Sign In",
         ),
         centerTitle: true,
+        //Create an Action Which will be just a single button to stay on top right corner
         actions: <Widget>[
           FlatButton(
             child: Text("Sign Up",
@@ -69,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   keyboardType: TextInputType.emailAddress,
                   validator: (text) {
                     if (text.isEmpty || !text.contains('@'))
-                      return "Invalid Email ";
+                      return "Username or Password Invalid ";
                   },
                 ),
                 SizedBox(height: 16.0),
@@ -82,14 +83,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   obscureText: true,
                   validator: (text) {
                     if (text.isEmpty || text.length < 6)
-                      return "Invalid Password ";
+                      return "Username or Password Invalid ";
                   },
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: FlatButton(
                     onPressed: () {
-
+                      //Check If Email is Empty
+                      if (_emailController.text.isEmpty){
+                        _scaffoldkey.currentState.showSnackBar(SnackBar
+                          (content: Text("Enter Recovery Email"),
+                          backgroundColor: Colors.redAccent,
+                          duration: Duration(seconds: 2),
+                        ));
+                      }
+                      else{
+                        model.recoverPass(_emailController.text);
+                        _scaffoldkey.currentState.showSnackBar(SnackBar
+                          (content: Text("Confirm Your Email "),
+                          backgroundColor: Theme.of(context).primaryColor,
+                          duration: Duration(seconds: 2),
+                        ));
+                      }
                     },
                     child: Text(
                       'Forgot Password',
@@ -98,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       textAlign: TextAlign.right,
                     ),
-                    //Take The Padding of the Buttong
+                    //Take The Padding of the Button
                     padding: EdgeInsets.zero,
                   ),
                 ),
@@ -107,6 +123,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 SizedBox(height: 44.0,
                   child: RaisedButton(onPressed: () {
+                    //In Order to Access The Validators we Must create a Form
+                    //Global Key on Top. and access it where you want to validate your fields.
                     if (_formkey.currentState.validate()) {
                       // print('DO LOGIN');
                       model.signIn(

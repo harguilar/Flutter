@@ -9,7 +9,7 @@ class UserModel extends Model{
   //Before Log in Current State.
   bool isLoading = false;
 
- // The add Listers is like form load when the App Opens you can load staff
+ // The add Listernes is like form load when the App Opens you can load staff
   @override
   void addListener(VoidCallback listener){
     super.addListener(listener);
@@ -71,7 +71,7 @@ class UserModel extends Model{
     ).then((user) async{
       firebaseUser = user;
 
-      //Load the Current User
+      //Load the Current User To display which User is logged in.
       await _loadCurrentUser();
       //Get Back to Main Page once You already Logined
       onSucess();
@@ -84,7 +84,10 @@ class UserModel extends Model{
     });
 
   }
-  void recoverPass(){}
+  void recoverPass(String email) {
+    _auth.sendPasswordResetEmail(email: email);
+
+  }
 
   void signOut() async{
     //Sign out user
@@ -93,7 +96,7 @@ class UserModel extends Model{
     userData = Map();
     //Show that Nobody is logged in
     firebaseUser = null;
-    //Notify all the Listers to change State.
+    //Notify all the Listerns to change State.
     notifyListeners();
   }
   bool isLoggedIn(){
