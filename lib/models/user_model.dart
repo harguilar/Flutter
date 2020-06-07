@@ -6,12 +6,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 //scopped model mantain the state of your user throughout the entire app
 class UserModel extends Model{
-
   //Before Log in Current State.
   bool isLoading = false;
 
-  FirebaseAuth _auth = FirebaseAuth.instance;
+ // The add Listers is like form load when the App Opens you can load staff
+  @override
+  void addListener(VoidCallback listener){
+    super.addListener(listener);
+    _loadCurrentUser();
+  }
 
+  FirebaseAuth _auth = FirebaseAuth.instance;
   //Define the User that will be logged in.
   FirebaseUser firebaseUser;
 
@@ -42,31 +47,42 @@ class UserModel extends Model{
       //Say that we are no longer loading
       isLoading = false;
       notifyListeners();
-      //notefyListener(false);
 
     }).catchError((e){
       onFailure();
       isLoading = false;
       notifyListeners();
-      //notefyListener(false);
     });
    /* print('Below is the Authentication Needed for it \n');
     print(_auth.createUserWithEmailAndPassword(email: userData['email'], password: pass));*/
   }
-  void signIn() async{
+  void signIn({@required String email, @required String pass,
+    @required VoidCallback onSucess,  @required  VoidCallback onFailure }) async{
     //Set is loading to true once you loging
     //isLoading = true;
+    //isLoadding is just processing
     isLoading = true;
     notifyListeners();
-   // notefyListener(true);
-    //notify listeners so that they know that the state changed.
-    //notifyListeners();
-   // notifyListeners();
-    //After 3 Seconds Away
-    await Future.delayed(Duration(seconds: 3));
-    isLoading = false;
-    notifyListeners();
-    //notefyListener(false);
+
+    //Sign in with Email and Password.
+    _auth.signInWithEmailAndPassword(
+        email: email,
+        password: pass
+    ).then((user) async{
+      firebaseUser = user;
+
+      //Load the Current User
+      await _loadCurrentUser();
+      //Get Back to Main Page once You already Logined
+      onSucess();
+      isLoading = false;
+      notifyListeners();
+    }).catchError((e){
+      isLoading = false;
+      notifyListeners();
+      onFailure();
+    });
+
   }
   void recoverPass(){}
 
@@ -90,6 +106,26 @@ class UserModel extends Model{
     this.userData = userData;
     //Create a User Collection with Firebase.
     await Firestore.instance.collection('users').document(firebaseUser.uid).setData(userData);
+  }
+  //Create a Method Null only to load the info rom user.
+  Future<Null> _loadCurrentUser() async {
+    //Check if there is no logged in user
+    if (firebaseUser ==  null)
+      //Get the Current User
+      firebaseUser = await _auth.currentUser();
+      if (firebaseUser != null){
+        //Check if user Data is not empty
+        if(userData['name'] == null){
+          //Get the User from Firestore
+          DocumentSnapshot docUser =
+              await Firestore.instance.collection('users').document(firebaseUser.uid).get();
+          //Assign User to Userdata
+          userData = docUser.data;
+        }
+      }
+      //Notify that we already have the User Data loaded
+      notifyListeners();
+
   }
 }
 
