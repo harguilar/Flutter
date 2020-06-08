@@ -11,7 +11,6 @@ class CustomDrawer extends StatelessWidget {
   final PageController pageController;
 
   CustomDrawer(this.pageController);
-
   @override
   Widget build(BuildContext context) {
     //This Widget is to give nice Colour of the top heading

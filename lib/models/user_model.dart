@@ -9,7 +9,11 @@ class UserModel extends Model{
   //Before Log in Current State.
   bool isLoading = false;
 
- // The add Listernes is like form load when the App Opens you can load staff
+  //Allow us to access from Anywhere the Users Model Without Creating Scoped Models.
+  static UserModel of(BuildContext context) =>
+      ScopedModel.of<UserModel>(context);
+
+ // The add Listernes is like form load when the App Opens you can load staff.
   @override
   void addListener(VoidCallback listener){
     super.addListener(listener);
@@ -38,7 +42,7 @@ class UserModel extends Model{
 
     ).then((user) async{
       //This Function will receive the User From Firebase
-      //if it is sucessfull Please Assign the User to Firebase User.
+      //if it is successful Please Assign the User to Firebase User.
       print(userData['email']);
       firebaseUser = user;
       //Save The whole UserData to FireStore

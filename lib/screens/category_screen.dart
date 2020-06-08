@@ -1,12 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jeilaonlinestore/datas/products_data.dart';
+import 'package:jeilaonlinestore/models/cart_model.dart';
+import 'package:jeilaonlinestore/screens/cart_screen.dart';
 import 'package:jeilaonlinestore/tiles/product_tile.dart';
+import 'package:scoped_model/scoped_model.dart';
 class CategoryScreen extends StatelessWidget {
-
+  //The Snapshot Gets the Category where we are Eg. Camisolas.
+  //Get the Category where we are Surfing.
   final DocumentSnapshot snapshot;
 
   CategoryScreen(this.snapshot);
+
+  //Create an Object Type Cart
+ // final int numProducts;
+  // CartScreen prod = CartScreen(this.numProducts);
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +28,23 @@ class CategoryScreen extends StatelessWidget {
           title: Text(snapshot.data['title']),
           //Centralize The Title
           centerTitle: true,
+          actions: <Widget>[
+            Container (
+              padding: EdgeInsets.only(right: 8.0),
+              alignment: Alignment.center,
+              child: ScopedModelDescendant<CartModel>(
+                builder: (context, child, model){
+                  int p = model.products.length;
+                  //if P is Null return 0
+                  return Text('${p ?? 0} ${p == 1 || p == 0? "ITEM" : "ITENS"}',
+                    style: TextStyle(fontSize: 17.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
           //Create a Tab at The Bottom
           bottom: TabBar(
             indicatorColor: Colors.white,
@@ -33,7 +58,9 @@ class CategoryScreen extends StatelessWidget {
         body: FutureBuilder<QuerySnapshot>(
           future: Firestore.instance.collection('products').document(snapshot.documentID)
               .collection('items').getDocuments(),
-          builder: (context, snapshot){
+          //The SnapShot below indicates each Document within our Category/Product.
+          //This One indicates every single Document with your category
+          builder: (context, snapshot ){
             if (!snapshot.hasData){
               return Center(child: CircularProgressIndicator(),);
             }
@@ -57,7 +84,12 @@ class CategoryScreen extends StatelessWidget {
                       itemCount: snapshot.data.documents.length,
 
                       itemBuilder: (context,index){
-                        return ProductTile('grid', ProductData.fromDocument(snapshot.data.documents[index]));
+                        //Create a Category of Each Product.
+                        //Get the Doc and Convert it to Product Data.
+                        ProductData data = ProductData.fromDocument(snapshot.data.documents[index]);
+                        //Get the Category ID of the Product for later usage.
+                        data.category = this.snapshot.documentID;
+                        return ProductTile('grid', data);
                       },
 
                   ),
@@ -65,7 +97,12 @@ class CategoryScreen extends StatelessWidget {
                      padding: EdgeInsets.all(4.0),
                      itemCount: snapshot.data.documents.length,
                      itemBuilder: (context, index){
-                       return ProductTile('List', ProductData.fromDocument(snapshot.data.documents[index]));
+                       //Create a Category of Each Product.
+                       //Get the Doc and Convert it to Product Data.
+                       ProductData data = ProductData.fromDocument(snapshot.data.documents[index]);
+                       //Get the Category ID of the Product for later usage.
+                       data.category = this.snapshot.documentID;
+                       return ProductTile('List', data);
                      }
                  ),
                 ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jeilaonlinestore/tabs/home_tab.dart';
 import 'package:jeilaonlinestore/tabs/products_tab.dart';
+import 'package:jeilaonlinestore/widgets/cart_button.dart';
 import 'package:jeilaonlinestore/widgets/customer_drawer.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,6 +18,8 @@ class HomeScreen extends StatelessWidget {
           body:  HomeTab(),
           //We create a Drawer to slide us The information.
           drawer: CustomDrawer(_pageController),
+          //The Carting Button to Home Page
+          floatingActionButton: CartButton(),
         ),
         //Create Another Pages
         Scaffold(
@@ -28,6 +31,8 @@ class HomeScreen extends StatelessWidget {
           drawer: CustomDrawer(_pageController),
           //This will Allow to Display All The Products in the Screen
           body:  ProductTab(),
+          //The Carting Button to Product Page
+          floatingActionButton: CartButton(),
         ),
         Container(color: Colors.yellow,),
         Container(color: Colors.green,),

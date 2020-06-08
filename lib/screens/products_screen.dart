@@ -1,7 +1,12 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:jeilaonlinestore/datas/cart_product.dart';
 import 'package:jeilaonlinestore/datas/products_data.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:jeilaonlinestore/models/cart_model.dart';
+import 'package:jeilaonlinestore/models/user_model.dart';
+import 'package:jeilaonlinestore/screens/login_screen.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 
 class ProductScreen extends StatefulWidget {
@@ -16,6 +21,9 @@ class _ProductScreenState extends State<ProductScreen> {
   //And Pass the Product as Parameter to allow us to use throughout the Entire State.
   final ProductData product;
   String s;
+
+
+
   _ProductScreenState(this.product);
   @override
   Widget build(BuildContext context) {
@@ -25,6 +33,23 @@ class _ProductScreenState extends State<ProductScreen> {
       appBar: AppBar(
         title: Text(product.title),
         centerTitle: true,
+        actions: <Widget>[
+          Container (
+            padding: EdgeInsets.only(right: 8.0),
+            alignment: Alignment.center,
+            child: ScopedModelDescendant<CartModel>(
+              builder: (context, child, model){
+                int p = model.products.length;
+                //if P is Null return 0
+                return Text('${p ?? 0} ${p == 1 || p == 0? "ITEM" : "ITENS"}',
+                  style: TextStyle(fontSize: 17.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
       //Create a List view so that we can scroll up and Down
       body: ListView(
@@ -120,9 +145,29 @@ class _ProductScreenState extends State<ProductScreen> {
                   child: RaisedButton(
                     //Disable The Button if size was not selected.
                     onPressed: s != null? (){
+                      if (UserModel.of(context).isLoggedIn()){
+                        //Adiciona ao Carrinho
+                        CartProduct cartProduct = CartProduct();
+                        //set the Size
+                        cartProduct.size = s;
+                        //set the Quantity to be add by 1
+                        cartProduct.quantity = 1;
+                        //Get the Product Id from the screen.
+                        cartProduct.pid = product.id;
+                        //
+                        cartProduct.category = product.category;
+                        //Add Itens to cart.
+                        CartModel.of(context).addCartItems(cartProduct);
+                      }
+                      else {
+                        //Send him to the Login Page.
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => LoginScreen()),
+                        );
+                      }
                     } : null,
-                    child: Text(
-                      'Adicionar ao Carrinho',
+                    child: Text( UserModel.of(context).isLoggedIn() ?'Adicionar ao Carrinho'
+                        : 'Entre Para Comprar',
                       style: TextStyle(
                         fontSize: 18.0,
                       ),
