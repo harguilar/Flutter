@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jeilaonlinestore/models/cart_model.dart';
 import 'package:jeilaonlinestore/models/user_model.dart';
 import 'package:jeilaonlinestore/tiles/cart_tiles.dart';
+import 'package:jeilaonlinestore/widgets/cart_price.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'login_screen.dart';
@@ -86,6 +87,8 @@ class CartScreen extends StatelessWidget {
                             return CartTile(product);
                   }).toList()
                 ),
+                //Pass an anonymous Function
+                CartPrice((){}),
               ],
             );
 

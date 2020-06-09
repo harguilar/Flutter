@@ -14,6 +14,8 @@ class CartTile extends StatelessWidget {
   Widget build(BuildContext context) {
 
     Widget _buildContent(){
+      //Please Update the Price by notifying the listeners.
+      CartModel.of(context).updatePrice();
       return Row(
         children: <Widget>[
           Container(

@@ -1,3 +1,4 @@
+import 'dart:core';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:jeilaonlinestore/datas/cart_product.dart';
@@ -34,7 +35,7 @@ class CartModel extends Model{
       //Create a Cart ID for the Document based on the info got from Firebase.
        cartProduct.cid = doc.documentID;
     });
-    //now notify listersn,
+    //now notify listerns,
     notifyListeners();
   }
   void removeCartItems(CartProduct cartProduct){
@@ -49,23 +50,50 @@ class CartModel extends Model{
   void decProduct(CartProduct cartProduct){
     //Decrease The Quantify
     cartProduct.quantity --;
-
     //Update The Database
     Firestore.instance.collection('users').document(user.firebaseUser.uid).collection('cart')
     .document(cartProduct.cid).updateData(cartProduct.toMap());
-
     //update Our Screen
     notifyListeners();
   }
-  void incProduct(CartProduct cartProduct){
+  //Get The Price of the Product
 
+  double getProductPrice(){
+    double price = 0.0;
+    //Check all the product in Cart Product.
+    for (CartProduct cart in products){
+      if( cart.productData !=null )
+        price += cart.productData.price * cart.quantity;
+    }
+    return price;
+  }
+
+  //Get The Discount
+  double getTax (){
+    //Vat.
+    return (getProductPrice() * 0.06);
+  }
+  void updatePrice(){
+    //To update the price just need to notify the listeners.
+    notifyListeners();
+  }
+  //Get the Delivery Price.
+  double getDelivery(){
+    return (getProductPrice() * 0.1);
+  }
+
+  double getTotal(){
+    double total = 0.0;
+    total = getProductPrice() + getTax() + getDelivery();
+    return total;
+  }
+
+  void incProduct(CartProduct cartProduct){
     //Increase The Quantity.
     cartProduct.quantity ++;
-
     //Update The Database
     Firestore.instance.collection('users').document(user.firebaseUser.uid).collection('cart')
         .document(cartProduct.cid).updateData(cartProduct.toMap());
-
     //update Our Screen
     notifyListeners();
   }
@@ -75,8 +103,6 @@ class CartModel extends Model{
     .collection('cart').getDocuments();
     //Transform Every Single Document From a FireBase into a Cart Product and Return a List will all Products
     products = query.documents.map((doc) => CartProduct.fromDoucment(doc)).toList();
-
     notifyListeners();
-
   }
 }
