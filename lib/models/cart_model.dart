@@ -1,8 +1,8 @@
 import 'dart:core';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:jeilaonlinestore/datas/cart_product.dart';
-import 'package:jeilaonlinestore/datas/products_data.dart';
 import 'package:jeilaonlinestore/models/user_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -96,6 +96,62 @@ class CartModel extends Model{
         .document(cartProduct.cid).updateData(cartProduct.toMap());
     //update Our Screen
     notifyListeners();
+  }
+
+  Future<String> finishOrder() async {
+    //check if the cart is empty
+    if (products.length == 0) return null;
+
+    isLoading = true;
+    //notify the listerns
+    notifyListeners();
+    double productPrice = getProductPrice();
+    double deliveryPrice = getDelivery();
+    double tax = getTax();
+    double total = getTotal();
+
+    //Add Orders to FireBase. and Get the Id of the Document.
+    DocumentReference refOrder = await Firestore.instance.collection('orders').add(
+
+      {
+        //Add the MAP to firestore.
+        'clientID': user.firebaseUser.uid,
+        //Convert The product in our Cart  to Map list.
+        'products': products.map((cartProduct) => cartProduct.toMap()).toList(),
+        'delivery': deliveryPrice,
+        'tax': tax,
+        'total': total,
+        //Status 1 means is processing your order 2 means is done.
+        'status': 1
+      }
+      //Now Lets Safe the Order ID within our User. so that we are aware which order belongs to which user.
+    );
+      await Firestore.instance.collection('users').document(user.firebaseUser.uid)
+        .collection('orders').document(refOrder.documentID).setData(
+        {
+          'OrderId': refOrder.documentID,
+        }
+    );
+
+      //Delete our Order once done.
+    QuerySnapshot query = await Firestore.instance.collection('users').document(user.firebaseUser.uid)
+     .collection('cart').getDocuments();
+    for (DocumentSnapshot doc in query.documents){
+      //delete the Document
+      doc.reference.delete();
+    }
+    //Clear your Local list
+    products.clear();
+
+    isLoading = false;
+
+    notifyListeners();
+
+    //return the Document reference so that the User get notified
+    return refOrder.documentID;
+
+
+
   }
   //Get all Information for the Cart.
   void _loadCartItems () async{

@@ -88,7 +88,12 @@ class CartScreen extends StatelessWidget {
                   }).toList()
                 ),
                 //Pass an anonymous Function
-                CartPrice((){}),
+                CartPrice(()async {
+                  //Get the Order ID
+                  String orderID = await model.finishOrder();
+                  if (orderID != null)
+                    print(orderID);
+                }),
               ],
             );
 
