@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:jeilaonlinestore/screens/signup_screen.dart';
 import 'package:jeilaonlinestore/tabs/home_tab.dart';
+import 'package:jeilaonlinestore/tabs/orders_tab.dart';
 import 'package:jeilaonlinestore/tabs/products_tab.dart';
 import 'package:jeilaonlinestore/widgets/cart_button.dart';
 import 'package:jeilaonlinestore/widgets/customer_drawer.dart';
+
+import 'login_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   //we Create This to allow us navigative Between Pages.
@@ -15,7 +19,7 @@ class HomeScreen extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
         Scaffold(
-          body:  HomeTab(),
+          body: HomeTab(),
           //We create a Drawer to slide us The information.
           drawer: CustomDrawer(_pageController),
           //The Carting Button to Home Page
@@ -35,7 +39,14 @@ class HomeScreen extends StatelessWidget {
           floatingActionButton: CartButton(),
         ),
         Container(color: Colors.yellow,),
-        Container(color: Colors.green,),
+        Scaffold(
+          appBar: AppBar(
+            title: Text("Meu Pedidos"),
+            centerTitle: true,
+          ),
+          body: OrdersTab(),
+          drawer: CustomDrawer(_pageController),
+        ),
       ],
     );
   }

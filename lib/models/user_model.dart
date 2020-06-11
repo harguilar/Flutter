@@ -65,6 +65,9 @@ class UserModel extends Model{
     //Set is loading to true once you loging
     //isLoading = true;
     //isLoadding is just processing
+
+   // signOut();
+
     isLoading = true;
     notifyListeners();
 
@@ -86,7 +89,6 @@ class UserModel extends Model{
       notifyListeners();
       onFailure();
     });
-
   }
   void recoverPass(String email) {
     _auth.sendPasswordResetEmail(email: email);
@@ -107,6 +109,7 @@ class UserModel extends Model{
     //check to see if the User is logged in
     //FirebaseUser = userData['name'];
     return firebaseUser !=null;
+
   }
 //Create a User Data Method to Store User info
   Future<Null> _saveUserData(Map<String, dynamic> userData) async{

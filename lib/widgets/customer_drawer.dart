@@ -55,7 +55,7 @@ class CustomDrawer extends StatelessWidget {
                       bottom: 0.0,
                       child: ScopedModelDescendant <UserModel>(
                         builder: (context, child, model){
-                          //print (model.isLoading);
+                         // print (model.isLoading);
                           return Column(
                             //This will align things a bit to the lef
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,6 +63,7 @@ class CustomDrawer extends StatelessWidget {
                               Text(
                                 //Check if someone is logged in.
                                 'Ola, ${!model.isLoggedIn() ? "" : (model.userData['name'])}',
+
                                 style: TextStyle(
                                   fontSize: 18.0,
                                   fontWeight: FontWeight.bold,

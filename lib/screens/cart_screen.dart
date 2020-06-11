@@ -6,6 +6,7 @@ import 'package:jeilaonlinestore/widgets/cart_price.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'login_screen.dart';
+import 'order_screen.dart';
 class CartScreen extends StatelessWidget {
   int p;
   CartScreen(this.p);
@@ -92,7 +93,7 @@ class CartScreen extends StatelessWidget {
                   //Get the Order ID
                   String orderID = await model.finishOrder();
                   if (orderID != null)
-                    print(orderID);
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>OrderScreen(orderID)));
                 }),
               ],
             );
