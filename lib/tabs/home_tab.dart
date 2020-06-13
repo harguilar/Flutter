@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -25,9 +26,12 @@ class HomeTab extends StatelessWidget {
         children: <Widget>[
           _buildBodyBack(),
           //This code allow when we move the contents th bar also moves.
+
+
           CustomScrollView(
             slivers: <Widget>[
-              SliverAppBar(
+              /*SliverAppBar(
+
                 //This allows the Top Bar in the title to move up whne ppl are scrolling up
                 floating: true,
                 //This the Title to show up as the floating start to disappear
@@ -35,10 +39,11 @@ class HomeTab extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 elevation: 0.0,
                 flexibleSpace: FlexibleSpaceBar(
-                  title: const Text('Novidades'),
+
+                 // title: const Text('Novidades'),
                   centerTitle: true,
-                ),
-              ),
+                ),*/
+             // ),
               FutureBuilder <QuerySnapshot>(
                 //Get the Documents and Order by the Position.
                 future: Firestore.instance.collection('home').orderBy('pos').getDocuments(),
@@ -50,7 +55,6 @@ class HomeTab extends StatelessWidget {
                   if(!snapshot.hasData) {
                     //if does not has data please Create  Progress indicator
                     return SliverToBoxAdapter(
-
                       child: Container(
                         height: 200.0,
                         alignment: Alignment.center,
@@ -91,4 +95,46 @@ class HomeTab extends StatelessWidget {
         ],
       );
   }
+}
+class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final double height;
+
+  const MyAppBar({
+    Key key,
+    @required this.height,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          color: Colors.grey[300],
+          child: Padding(
+            padding: EdgeInsets.all(30),
+            child: AppBar(
+              title: Container(
+                color: Colors.white,
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: "Search",
+                    contentPadding: EdgeInsets.all(10),
+                  ),
+                ),
+              ),
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.verified_user),
+                  onPressed: () => null,
+                ),
+              ],
+            ) ,
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(height);
 }

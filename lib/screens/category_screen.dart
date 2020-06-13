@@ -25,6 +25,7 @@ class CategoryScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+
           title: Text(snapshot.data['title']),
           //Centralize The Title
           centerTitle: true,

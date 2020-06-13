@@ -20,6 +20,15 @@ class HomeScreen extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
         Scaffold(
+          appBar: AppBar(
+            //flexibleSpace: ,
+            //title: Text('Search App'),
+            actions: <Widget> [
+              IconButton(icon: Icon(Icons.search),onPressed: (){
+              },)
+            ],
+            //backgroundColor: Colors.transparent,
+          ),
           body: HomeTab(),
           //We create a Drawer to slide us The information.
           drawer: CustomDrawer(_pageController),
