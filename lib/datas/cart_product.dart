@@ -32,7 +32,7 @@ class CartProduct {
       'pid': pid,
       'quantity': quantity,
       'size': size,
-      //We also going to add product which is going to be a summary of everyting that will
+      //We also going to add product which is going to be a summary of everything that will
       //show up in our requests.
       //'product':productData.productsResumed(),
     };

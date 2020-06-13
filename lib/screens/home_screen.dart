@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jeilaonlinestore/screens/signup_screen.dart';
 import 'package:jeilaonlinestore/tabs/home_tab.dart';
 import 'package:jeilaonlinestore/tabs/orders_tab.dart';
+import 'package:jeilaonlinestore/tabs/places_tabs.dart';
 import 'package:jeilaonlinestore/tabs/products_tab.dart';
 import 'package:jeilaonlinestore/widgets/cart_button.dart';
 import 'package:jeilaonlinestore/widgets/customer_drawer.dart';
@@ -38,7 +39,15 @@ class HomeScreen extends StatelessWidget {
           //The Carting Button to Product Page
           floatingActionButton: CartButton(),
         ),
-        Container(color: Colors.yellow,),
+       // Container(color: Colors.yellow,),
+        Scaffold(
+          appBar: AppBar(
+            title: Text('Minhas Lojas'),
+            centerTitle: true,
+          ),
+          body: PlacesTabs(),
+          drawer: CustomDrawer(_pageController),
+        ),
         Scaffold(
           appBar: AppBar(
             title: Text("Meu Pedidos"),
