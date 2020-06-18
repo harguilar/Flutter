@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gerente_loja/helpers/const_global.dart';
-import 'package:gerente_loja/screens/login_screen.dart';
+import 'package:gerente_loja/ui/screens/login_screen.dart';
+
 
 
 class ProfileTab extends StatefulWidget {

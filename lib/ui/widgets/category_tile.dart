@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:gerente_loja/screens/product_screen.dart';
-import 'package:gerente_loja/widgets/edit_category_dialog.dart';
+import 'package:gerente_loja/ui/screens/product_screen.dart';
+
+import 'edit_category_dialog.dart';
+
 
 class CategoryTile extends StatelessWidget {
 

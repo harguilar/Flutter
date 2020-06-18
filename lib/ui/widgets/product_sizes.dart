@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gerente_loja/widgets/add_size_dialog.dart';
+
+import 'add_size_dialog.dart';
+
 
 class ProductSizes extends FormField<List> {
 

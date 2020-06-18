@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gerente_loja/screens/home_screen.dart';
-import 'package:gerente_loja/screens/login_screen.dart';
-import 'package:gerente_loja/screens/signup_screen.dart';
+import 'package:gerente_loja/ui/screens/home_screen.dart';
+
 
 
 class AuthService {

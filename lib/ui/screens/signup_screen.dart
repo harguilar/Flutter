@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gerente_loja/core/models/user.dart';
 import 'package:gerente_loja/helpers/const_global.dart';
-import 'package:gerente_loja/models/user.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'home_screen.dart';

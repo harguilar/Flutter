@@ -1,19 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:gerente_loja/screens/quote_screen.dart';
+import 'package:gerente_loja/core/models/proforma.dart';
+import 'package:gerente_loja/ui/screens/quote_screen.dart';
+
 
 
 class QuoteTile extends StatelessWidget {
 
-  final DocumentSnapshot snapshot;
+  final Proforma  proforma;
 
-  QuoteTile(this.snapshot);
+  QuoteTile(this.proforma);
 
 
 
   @override
   Widget build(BuildContext context) {
-    Map<String ,dynamic> dt=snapshot.data;
+
 
     return ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
@@ -24,11 +26,11 @@ class QuoteTile extends StatelessWidget {
               border: new Border(
                   right: new BorderSide(width: 1.0, color: Colors.white24))),
           child: Image.network(
-            snapshot.data['imgUrl'],
+            proforma.imgUrl,
             fit: BoxFit.cover,
           )
         ),
-        title: Text('${ dt['make']} ' +'${dt['model'] } '+ '${dt['year'] }',
+        title: Text('${ proforma.make} ' +'${ proforma.model } '+ '${proforma.year }',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
@@ -36,7 +38,7 @@ class QuoteTile extends StatelessWidget {
         subtitle: Row(
           children: <Widget>[
             Icon(Icons.linear_scale, color: Colors.yellowAccent),
-            Text(snapshot.data['peca'], style: TextStyle(color: Colors.white),
+            Text(proforma.peca, style: TextStyle(color: Colors.white),
             maxLines: 2,
             )
           ],
@@ -44,12 +46,12 @@ class QuoteTile extends StatelessWidget {
         onTap: (){
 
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context)=>QuoteScreen(snapshot) )
+            MaterialPageRoute(builder: (context)=>QuoteScreen(proforma) )
           );
         },
         onLongPress: (){
           Navigator.of(context).push(
-              MaterialPageRoute(builder: (context)=>QuoteScreen(snapshot) )
+              MaterialPageRoute(builder: (context)=>QuoteScreen(proforma) )
           );
         },
         trailing:

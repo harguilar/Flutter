@@ -1,19 +1,22 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:gerente_loja/core/controllers/user_controller.dart';
+import 'package:gerente_loja/core/models/proforma.dart';
+import 'package:gerente_loja/core/models/reply_data.dart';
+import 'package:gerente_loja/core/models/user.dart';
 import 'package:gerente_loja/helpers/const_global.dart';
-import 'package:gerente_loja/models/proforma.dart';
-import 'package:gerente_loja/models/reply_data.dart';
 import 'package:gerente_loja/repository/repository.dart';
 import 'package:intl/intl.dart';
 
 enum PartStatus { nova, usada }
 
 class QuoteScreen extends StatefulWidget {
-  final DocumentSnapshot snapshot;
+  final Proforma proforma;
 
-  QuoteScreen(this.snapshot);
+  QuoteScreen(this.proforma);
 
   @override
   _QuoteScreenState createState() => _QuoteScreenState();
@@ -27,24 +30,31 @@ class _QuoteScreenState extends State<QuoteScreen> {
   bool hideReplyFields = false;
   FirebaseUser vendor;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  Map<String, dynamic> dt = Map<String, dynamic>();
+  final userController = BlocProvider.getBloc<UserController>();
+  Map<String, dynamic > user;
+
 
   void iniState() {
     super.initState();
     ConstGlobal.getCurrentUser().then((value) => vendor = value);
-    _alreadyRepliedToQuote(widget.snapshot)
+    _alreadyRepliedToQuote()
         .then((value) => hideReplyFields = value);
+
+    user  = userController.getUser(vendor.uid);
   }
 
 //Check if this vendor has already replied to this quotation
 
-  Future<bool> _alreadyRepliedToQuote(DocumentSnapshot documentSnapshot) async {
+  Future<bool> _alreadyRepliedToQuote() async {
     try {
-      return await Firestore.instance
+      return await
+
+
+      Firestore.instance
           .collection('proformas')
-          .document(documentSnapshot.documentID)
+          .document(widget.proforma.id)
           .collection('replies')
-          .document('oezmYolpDFXiyRXZvzPvfbmDAah1')
+          .document(vendor.uid)
           .get()
           .then((value) => value.exists);
     } catch (err) {
@@ -56,18 +66,17 @@ class _QuoteScreenState extends State<QuoteScreen> {
   Widget build(BuildContext context) {
     ConstGlobal.getCurrentUser().then((value) => vendor = value);
 
-    Proforma proformaModel = Proforma.fromDocument(widget.snapshot);
-    dt = widget.snapshot.data;
+
 
     return Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
           title: Text(
-            '${dt['make']} ' +
-                '${dt['model']} ' +
-                '${dt['year']}' +
+            '${widget.proforma.make} ' +
+                '${widget.proforma.model} ' +
+                '${widget.proforma.year}' +
                 ' ' +
-                '${dt['trim']}',
+                '${widget.proforma.trim}',
             style: TextStyle(color: Colors.amber, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
@@ -75,7 +84,7 @@ class _QuoteScreenState extends State<QuoteScreen> {
         ),
         body: ListView(
           children: [
-            Image.network(dt['imgUrl'])
+            Image.network(widget.proforma.imgUrl)
             /* AspectRatio(
             aspectRatio: 0.9,
             child:  Carousel(
@@ -96,7 +105,7 @@ class _QuoteScreenState extends State<QuoteScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'Peça: ${dt['peca']}',
+                    'Peça: ${widget.proforma.peca}',
                     style:
                         TextStyle(fontSize: 22.0, fontWeight: FontWeight.w500),
                     maxLines: 3,
@@ -105,7 +114,7 @@ class _QuoteScreenState extends State<QuoteScreen> {
                     height: 10,
                   ),
                   Text(
-                    dt['make'] + ' ' + dt['model'] + ' ' + dt['trim'],
+                    widget.proforma.make + ' ' + widget.proforma.model+ ' ' + widget.proforma.trim,
                     style:
                         TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
                     maxLines: 3,
@@ -115,8 +124,8 @@ class _QuoteScreenState extends State<QuoteScreen> {
                   ),
                   Text(
                     hideReplyFields
-                        ? 'Você enviou uma proforma aos: ${DateFormat('dd-MM-yyyy').format(dt['date'].toDate())}'
-                        : 'Data enviada: ${DateFormat('dd-MM-yyyy').format(dt['date'].toDate())}',
+                        ? 'Você enviou uma proforma aos: ${DateFormat('dd-MM-yyyy').format(widget.proforma.date)}'
+                        : 'Data enviada: ${DateFormat('dd-MM-yyyy').format(widget.proforma.date)}',
                     style:
                         TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
                     maxLines: 3,
@@ -174,19 +183,20 @@ class _QuoteScreenState extends State<QuoteScreen> {
                           height: 44.0,
                           child: RaisedButton(
                             onPressed: () {
-                              proformaModel.status = 2;
+                              widget.proforma.status = 2;
 
                               Reply reply = Reply(
                                   vendorId: vendor.uid,
-                                  vendorName: vendor.displayName,
+                                  vendorName: vendor.displayName/*user['name']*/,
                                   date: DateTime.now(),
                                   brandNew:
                                       _status == PartStatus.nova ? true : false,
                                   price: double.parse(
-                                      _priceTextFiledController.text));
+                                      _priceTextFiledController.text)
+                              );
 
-                              repository.updateQuote(proformaModel);
-                              repository.addReply(reply, proformaModel);
+                              repository.updateQuote(widget.proforma);
+                              repository.addReply(reply, widget.proforma);
 
                               setState(() {});
 

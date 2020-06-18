@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gerente_loja/blocs/home_bloc.dart';
 import 'package:gerente_loja/blocs/orders_bloc.dart';
 import 'package:gerente_loja/blocs/quote_bloc.dart';
-import 'package:gerente_loja/tabs/orders_tab.dart';
-import 'package:gerente_loja/tabs/profile_tab.dart';
-import 'package:gerente_loja/tabs/quotes_tab.dart';
+import 'package:gerente_loja/ui/tabs/orders_tab.dart';
+import 'package:gerente_loja/ui/tabs/profile_tab.dart';
+import 'package:gerente_loja/ui/tabs/quotes_tab.dart';
 import 'package:provider/provider.dart';
 
 

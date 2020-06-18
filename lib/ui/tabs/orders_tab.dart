@@ -1,7 +1,7 @@
-import 'package:bloc_pattern/bloc_pattern.dart';
+
 import 'package:flutter/material.dart';
-import 'package:gerente_loja/blocs/orders_bloc.dart';
-import 'package:gerente_loja/widgets/order_tile.dart';
+import 'package:gerente_loja/ui/widgets/order_tile.dart';
+
 
 class OrdersTab extends StatelessWidget {
   @override
