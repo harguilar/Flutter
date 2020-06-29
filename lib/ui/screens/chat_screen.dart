@@ -9,7 +9,7 @@ class ChatScreen extends StatelessWidget {
       backgroundColor: Color.fromRGBO(64, 75, 96, .9),
       body: Column(
         children: <Widget>[
-          CategorySelector(),
+          MenuSelector(),
           Expanded(
             child: Container(
               decoration: BoxDecoration(

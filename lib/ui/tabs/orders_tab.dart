@@ -11,7 +11,7 @@ class OrdersTab extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pistom-Compras da Sua Loja'
+        title: Text('Compras da sua Loja'
           ,style: TextStyle(color: Colors.amber,fontWeight: FontWeight.bold),),
         centerTitle: true,
         backgroundColor: Color.fromRGBO(64, 75, 96, .9),

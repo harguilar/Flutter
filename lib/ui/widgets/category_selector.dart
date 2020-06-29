@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 
-class CategorySelector extends StatefulWidget {
+class MenuSelector extends StatefulWidget {
   @override
-  _CategorySelectorState createState() => _CategorySelectorState();
+  _MenuSelectorState createState() => _MenuSelectorState();
 }
 
-class _CategorySelectorState extends State<CategorySelector> {
+class _MenuSelectorState extends State<MenuSelector> {
   int selectedIndex=0;
-  final List<String> categories =['Messagens','Online'];
+  final List<String> menuVendor =['Minhas Peças','Proformas','Pedidos'];
+  final List<String> menuBuyer =['Pedir Proformas','Minhas Proformas','Pedidos','Perfil'];
 
 
   
@@ -19,7 +20,7 @@ class _CategorySelectorState extends State<CategorySelector> {
       color: Color.fromRGBO(64, 75, 96, .9),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
+        itemCount: menuVendor.length,
           itemBuilder: (BuildContext context, int index)
           {
             return GestureDetector(
@@ -31,10 +32,10 @@ class _CategorySelectorState extends State<CategorySelector> {
               } ,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0,vertical: 30.0),
-                child: Text(categories[index],style: TextStyle(
-                    color: index== selectedIndex? Colors.white: Colors.white60,
+                child: Text(menuVendor[index],style: TextStyle(
+                    color: index== selectedIndex? Colors.amber: Colors.white60,
                 fontWeight: FontWeight.bold,
-                fontSize: 18.0,
+                fontSize: 20.0,
 
                 letterSpacing: 1.2) ,
                 ),

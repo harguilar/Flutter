@@ -17,7 +17,7 @@ class QuotesTab extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pistom-Pedidos de Proformas'
+        title: Text('Pedidos de Proformas'
           ,style: TextStyle(color: Colors.amber,fontWeight: FontWeight.bold),),
         centerTitle: true,
         backgroundColor: Color.fromRGBO(64, 75, 96, .9),

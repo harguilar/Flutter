@@ -5,6 +5,7 @@ import 'package:gerente_loja/blocs/quote_bloc.dart';
 import 'package:gerente_loja/ui/tabs/orders_tab.dart';
 import 'package:gerente_loja/ui/tabs/profile_tab.dart';
 import 'package:gerente_loja/ui/tabs/quotes_tab.dart';
+import 'package:gerente_loja/ui/widgets/category_selector.dart';
 import 'package:provider/provider.dart';
 
 import 'chat_screen.dart';
@@ -44,7 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[850],
+
+     // backgroundColor: Colors.grey[850],
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Color.fromRGBO(58, 66, 86, 1.0),
@@ -84,7 +86,26 @@ class _HomeScreenState extends State<HomeScreen> {
           ]
         ),
       ),
-      body: SafeArea(
+      body:  Column(
+        children: <Widget>[
+          MenuSelector(),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.yellow[100],
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30.0),
+                      topRight: Radius.circular(30.0))),
+              child: Column(
+                children: [
+                  Container(),
+                  Container(),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),/*SafeArea(
 
         child: MultiProvider(
            providers: [
@@ -93,12 +114,12 @@ class _HomeScreenState extends State<HomeScreen> {
                dispose: (context, value) => value.dispose(),
 
              ),
-           /*  Provider<OrdersBloc>(
+             Provider<OrdersBloc>(
                create: (_) =>OrdersBloc() ,
                dispose: (context, value) => value.dispose(),
 
              )
-*/
+
            ],
           child: PageView(
           controller: _pageController,
@@ -118,52 +139,18 @@ class _HomeScreenState extends State<HomeScreen> {
         )
 
 
-      ),
-      //floatingActionButton: _buildFloating(),
+      ),*/
+      floatingActionButton: _buildFloating(),
     );
   }
 
-/*  Widget _buildFloating(){
-    switch(_page){
-      case 0:
-        return null;
-      case 1:
-        return SpeedDial(
-          child: Icon(Icons.sort),
-          backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-          overlayOpacity: 0.4,
-          overlayColor: Colors.black,
-          children: [
-            SpeedDialChild(
-              child: Icon(Icons.arrow_downward, color: Color.fromRGBO(58, 66, 86, 1.0),),
-              backgroundColor: Colors.white,
-              label: "Concluídos Abaixo",
-              labelStyle: TextStyle(fontSize: 14),
-              onTap: (){
-                _ordersBloc.setOrderCriteria(SortCriteria.READY_LAST);
-              }
-            ),
-            SpeedDialChild(
-              child: Icon(Icons.arrow_upward, color: Color.fromRGBO(58, 66, 86, 1.0),),
-              backgroundColor: Colors.white,
-              label: "Concluídos Acima",
-              labelStyle: TextStyle(fontSize: 14),
-              onTap: (){
-                _ordersBloc.setOrderCriteria(SortCriteria.READY_FIRST);
-              }
-            )
-          ],
-        );
-      case 2:
-        return FloatingActionButton(
-          child: Icon(Icons.add),
-          backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-          onPressed: (){
-            showDialog(context: context,
-                builder: (context) => EditCategoryDialog()
-            );
-          },
-        );
-    }
-  }*/
+  Widget _buildFloating(){
+    return FloatingActionButton(
+      child: Icon(Icons.add),
+      backgroundColor: Colors.green,
+      onPressed: (){
+
+      },
+    );
+  }
 }
