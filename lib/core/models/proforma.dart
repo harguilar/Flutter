@@ -27,6 +27,7 @@ class Proforma {
   String model;
   String trim;
   int year;
+  String userName;
 
 
 
@@ -44,7 +45,8 @@ class Proforma {
     this.vinNumber,
     this.make,
     this.model,
-    this.trim
+    this.trim,
+    this.userName
   });
 
 
@@ -59,6 +61,7 @@ class Proforma {
     make= documentSnapshot.data['make'];
     model = documentSnapshot.data['model'];
     trim = documentSnapshot.data['trim'];
+    userName=documentSnapshot.data['userName'];
 
     Firestore.instance.collection('proformas').document(documentSnapshot.documentID)
         .collection('replies').snapshots().listen( _convertReplies );
@@ -111,6 +114,7 @@ class Proforma {
     make: json["make"],
     model: json["model"],
     trim: json["trim"],
+    userName: json["userName"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -124,7 +128,8 @@ class Proforma {
     "make":make,
     "model":model,
     "trim":trim,
-    "id" : id
+    "id" : id,
+    "userName":userName
   };
 
 }

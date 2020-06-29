@@ -7,6 +7,8 @@ import 'package:gerente_loja/ui/tabs/profile_tab.dart';
 import 'package:gerente_loja/ui/tabs/quotes_tab.dart';
 import 'package:provider/provider.dart';
 
+import 'chat_screen.dart';
+
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -108,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
             QuotesTab(),
             OrdersTab(),
-            //ChatTab(),
+           // ChatScreen(),
             ProfileTab(),
           ],
         ),

@@ -9,7 +9,10 @@ import 'package:gerente_loja/core/models/reply_data.dart';
 import 'package:gerente_loja/core/models/user.dart';
 import 'package:gerente_loja/helpers/const_global.dart';
 import 'package:gerente_loja/repository/repository.dart';
+
 import 'package:intl/intl.dart';
+
+import 'chat_direct.dart';
 
 enum PartStatus { nova, usada }
 
@@ -31,26 +34,30 @@ class _QuoteScreenState extends State<QuoteScreen> {
   FirebaseUser vendor;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final userController = BlocProvider.getBloc<UserController>();
-  Map<String, dynamic > user;
-
+  //Map<String, dynamic> user;
+   User buyer;
 
   void iniState() {
     super.initState();
     ConstGlobal.getCurrentUser().then((value) => vendor = value);
-    _alreadyRepliedToQuote()
-        .then((value) => hideReplyFields = value);
+    _alreadyRepliedToQuote().then((value) => hideReplyFields = value);
 
-    user  = userController.getUser(vendor.uid);
+    print(widget.proforma.userId);
+    print(widget.proforma.userId);
+    print(widget.proforma.userId);
+    print(widget.proforma.userId);
+
+    //user = userController.getUser(vendor.uid);
+     userController.getUserById(widget.proforma.userId).then((value) => buyer=value);
+
+
   }
 
 //Check if this vendor has already replied to this quotation
 
   Future<bool> _alreadyRepliedToQuote() async {
     try {
-      return await
-
-
-      Firestore.instance
+      return await Firestore.instance
           .collection('proformas')
           .document(widget.proforma.id)
           .collection('replies')
@@ -65,8 +72,6 @@ class _QuoteScreenState extends State<QuoteScreen> {
   @override
   Widget build(BuildContext context) {
     ConstGlobal.getCurrentUser().then((value) => vendor = value);
-
-
 
     return Scaffold(
         key: _scaffoldKey,
@@ -104,6 +109,28 @@ class _QuoteScreenState extends State<QuoteScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Cliente: ${widget.proforma.userName}',
+                        style: TextStyle(
+                            fontSize: 22.0, fontWeight: FontWeight.w500),
+                        maxLines: 3,
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.chat,
+                          color: Colors.amber,
+                          size: 35,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ChatDirect(user: buyer) ));
+                        },
+                      )
+                    ],
+                  ),
                   Text(
                     'Peça: ${widget.proforma.peca}',
                     style:
@@ -114,7 +141,11 @@ class _QuoteScreenState extends State<QuoteScreen> {
                     height: 10,
                   ),
                   Text(
-                    widget.proforma.make + ' ' + widget.proforma.model+ ' ' + widget.proforma.trim,
+                    widget.proforma.make +
+                        ' ' +
+                        widget.proforma.model +
+                        ' ' +
+                        widget.proforma.trim,
                     style:
                         TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
                     maxLines: 3,
@@ -187,13 +218,13 @@ class _QuoteScreenState extends State<QuoteScreen> {
 
                               Reply reply = Reply(
                                   vendorId: vendor.uid,
-                                  vendorName: vendor.displayName/*user['name']*/,
+                                  vendorName:
+                                      vendor.displayName /*user['name']*/,
                                   date: DateTime.now(),
                                   brandNew:
                                       _status == PartStatus.nova ? true : false,
                                   price: double.parse(
-                                      _priceTextFiledController.text)
-                              );
+                                      _priceTextFiledController.text));
 
                               repository.updateQuote(widget.proforma);
                               repository.addReply(reply, widget.proforma);

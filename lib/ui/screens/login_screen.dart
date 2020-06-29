@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flushbar/flushbar.dart';
-import 'package:gerente_loja/core/models/user.dart';
+import 'package:gerente_loja/core/models/user_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'home_screen.dart';
@@ -24,8 +24,9 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          title: Text("Entrar"),
+          title: Text("Autenticação por Telefone"),
           centerTitle: true,
+          backgroundColor: Color.fromRGBO(64, 75, 96, .9),
 
         ),
         body: ScopedModelDescendant<UserModel>(
@@ -42,9 +43,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: <Widget>[
                   TextFormField(
                     controller: _emailController,
-                    decoration: InputDecoration(hintText: "Telefone"),
+                    decoration: InputDecoration(hintText: "Digite seu telefone para continuar"),
                     keyboardType: TextInputType.number,
-                    validator: (text) => text.isEmpty || !text.contains("9")
+                    validator: (text) => text.isEmpty/*|| !text.contains("9")*/
                         ? "Digite um número valído"
                         : null,
                     onChanged: (value) {
@@ -63,13 +64,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 44.0,
                     child: RaisedButton(
                       child: Text(
-                        "Entrar",
+                        "Enviar",
                         style: TextStyle(
                           fontSize: 18.0,
                         ),
                       ),
                       textColor: Colors.white,
-                      color: Theme.of(context).primaryColor,
+                      color:Color.fromRGBO(64, 75, 96, .9),
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
                           await model.verifyPhone(

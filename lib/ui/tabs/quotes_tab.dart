@@ -2,7 +2,7 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:gerente_loja/core/controllers/proformas_controller.dart';
 import 'package:gerente_loja/core/models/proforma.dart';
-import 'package:gerente_loja/ui/tiles/quote_tile.dart';
+import 'package:gerente_loja/ui/widgets/quote_tile.dart';
 
 
 
@@ -17,8 +17,8 @@ class QuotesTab extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pistom Proformas'
-        ,style: TextStyle(color: Colors.amber,fontWeight: FontWeight.bold),),
+        title: Text('Pistom-Pedidos de Proformas'
+          ,style: TextStyle(color: Colors.amber,fontWeight: FontWeight.bold),),
         centerTitle: true,
         backgroundColor: Color.fromRGBO(64, 75, 96, .9),
 

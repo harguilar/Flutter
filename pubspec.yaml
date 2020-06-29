@@ -20,8 +20,9 @@ dependencies:
   flutter:
     sdk: flutter
   firebase_auth:
-  intl:
   flushbar: ^1.9.1
+  intl: ^0.16.0
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -50,6 +51,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.7.5
+flutter_icons:
+  image_path: "assets/logo.png"
+  ios: true
+  android: true
+
 
 
 # For information on the generic Dart part of this file, see the

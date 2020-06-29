@@ -28,7 +28,8 @@ class _ProfileTabState extends State<ProfileTab> {
         body: Stack(
           children: <Widget>[
             ClipPath(
-              child: Container(color: Theme.of(context).primaryColor),
+              child: Container(
+                  color: Theme.of(context).primaryColor),
               clipper: GetClipper(),
             ),
             Positioned(
@@ -94,6 +95,29 @@ class _ProfileTabState extends State<ProfileTab> {
                             child: Center(
                               child: Text(
                                 'Editar o perfil',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        )),
+                    SizedBox(height: 25.0),
+                    Container(
+
+                        height: 30.0,
+                        width: 150.0,
+                        child: Material(
+                          borderRadius: BorderRadius.circular(20.0),
+                          shadowColor: Colors.greenAccent,
+                          color: Colors.green,
+                          elevation: 7.0,
+                          child: GestureDetector(
+                            onTap: () => showDialogContactUs(),
+                            child: Center(
+                              child: Text(
+                                'Contactar Pistom',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: 'Montserrat',
@@ -173,6 +197,106 @@ class _ProfileTabState extends State<ProfileTab> {
           ],
         ));
   }
+
+
+
+  showDialogContactUs() => showDialog(
+      context: context,
+      builder: (context) {
+
+        TextEditingController _messController = TextEditingController();
+        return AlertDialog(
+          title: Text("Contactar a Pistom"),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                /*
+                TextFormField(
+                  controller: messController,
+                  decoration: InputDecoration(
+                      labelText: "Escreva aqui a sua Mensagem", border: OutlineInputBorder()),
+                  onChanged: (value){},
+                ),*/
+                Card(
+
+                    child: Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: TextField(
+                        controller: _messController,
+                        maxLines: 15,
+                        decoration: InputDecoration.collapsed(hintText: "Insira aqui a sua mensagem"),
+                          keyboardType: TextInputType.multiline
+                      ),
+                    )
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+
+
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Enviar"),
+              onPressed: () async {
+                showDialog(
+                    context: context,
+                    builder: (context) => Center(
+                      child: CircularProgressIndicator(),
+                    ));
+
+
+                Map<String, dynamic> userMessage ={
+                  'text' :_messController.text,
+                  'date':DateTime.now()
+
+                };
+
+                await Firestore.instance
+                    .collection("users")
+                    .document(ConstGlobal.user.uid).collection('supportMessages').document()
+                    .setData(userMessage)
+
+                    .then((_) {
+                  setState(() {
+                   // ConstGlobal.userData = userData;
+                  });
+
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+
+                  _scaffoldKey.currentState.showSnackBar(
+                      SnackBar(content: Text("Mensagem enviada com successo !Vamos entrar em contacto")));
+                }).catchError((e) {
+                  print(e.toString());
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+
+                  _scaffoldKey.currentState.showSnackBar(SnackBar(
+                      backgroundColor: Colors.red,
+                      content: Text(
+                        "Ocorreu um erro, tente mais tarde",
+                        style: TextStyle(color: Colors.white),
+                      )));
+                });
+              },
+            ),
+            FlatButton(
+              child: Text("Cancelar"),
+              onPressed: () => Navigator.pop(context),
+            )
+          ],
+        );
+      });
+
+
+
+
+
+
 
   showDialogEditProfile() => showDialog(
       context: context,

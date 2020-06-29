@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gerente_loja/core/models/user.dart';
+import 'package:gerente_loja/core/models/user_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'home_screen.dart';
 
@@ -28,6 +28,7 @@ class _LoginConfirmationScreenState extends State<LoginConfirmationScreen> {
         appBar: AppBar(
           title: Text("Validação do Código"),
           centerTitle: true,
+          backgroundColor: Color.fromRGBO(64, 75, 96, .9),
 
         ),
         body: ScopedModelDescendant<UserModel>(
@@ -48,7 +49,7 @@ class _LoginConfirmationScreenState extends State<LoginConfirmationScreen> {
                     maxLines: 1,
 
                     decoration: InputDecoration(
-                      hintText: "Código enviado",
+                      hintText: "Insira o Código  que recebeu no Telefone",
 
                     ),
                     keyboardType: TextInputType.number,
@@ -73,7 +74,7 @@ class _LoginConfirmationScreenState extends State<LoginConfirmationScreen> {
                         ),
                       ),
                       textColor: Colors.white,
-                      color: Theme.of(context).primaryColor,
+                      color: Color.fromRGBO(64, 75, 96, .9),
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
                           model.signIn(

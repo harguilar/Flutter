@@ -38,6 +38,7 @@ class ProformasProvider {
               trim: item["trim"],
               imgUrl: item.data["imgUrl"].toString(),
               peca: item.data["peca"].toString(),
+              userName: item.data["userName"]
             );
 
           }

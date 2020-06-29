@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:gerente_loja/ui/screens/login_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+import 'core/controllers/orders_controller.dart';
 import 'core/controllers/proformas_controller.dart';
 import 'core/controllers/user_controller.dart';
 import 'core/controllers/vehicle_controller.dart';
-import 'core/models/user.dart';
+import 'core/models/user_model.dart';
 
 
 void main() => runApp(
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
             blocs: [
               Bloc((x) => VehicleController()),
               Bloc((x) => ProformasController()),
-              Bloc((x) => UserController())
+              Bloc((x) => UserController()),
+              Bloc((x)=>OrdersController())
             ],
             child: MaterialApp(
               title: 'PISTOM',

@@ -1,22 +1,6 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/admin/Desktop/FLUTTER/pistom_loja/build/app/intermediates/res/merged/debug/values-v25_values-v25.arsc.flat",
-            "map": [
-                {
-                    "source": "/Users/admin/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.0.aar/403731ed16f9c5e899014bbb475b5483/res/values-v25/values-v25.xml",
-                    "from": {
-                        "startLines": "2,3,4,6",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,126,209,308",
-                        "endLines": "2,3,5,7",
-                        "endColumns": "70,82,12,12",
-                        "endOffsets": "121,204,303,414"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "/Users/admin/Desktop/FLUTTER/pistom_loja/build/app/intermediates/res/merged/debug/values-ka_values-ka.arsc.flat",
             "map": [
                 {
@@ -85,6 +69,22 @@
                         "startOffsets": "2818,2925,3106,3236,3348,3561,3697,3849,4188,4420,4530,4716,4846,5066,5235,5331,5422",
                         "endColumns": "106,180,129,111,212,135,151,136,231,109,185,129,219,168,95,90,104",
                         "endOffsets": "2920,3101,3231,3343,3556,3692,3844,3981,4415,4525,4711,4841,5061,5230,5326,5417,5522"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/admin/Desktop/FLUTTER/pistom_loja/build/app/intermediates/res/merged/debug/values-v25_values-v25.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/admin/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.0.aar/403731ed16f9c5e899014bbb475b5483/res/values-v25/values-v25.xml",
+                    "from": {
+                        "startLines": "2,3,4,6",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,126,209,308",
+                        "endLines": "2,3,5,7",
+                        "endColumns": "70,82,12,12",
+                        "endOffsets": "121,204,303,414"
                     }
                 }
             ]
@@ -1990,22 +1990,6 @@
             ]
         },
         {
-            "outputFile": "/Users/admin/Desktop/FLUTTER/pistom_loja/build/app/intermediates/res/merged/debug/values-v22_values-v22.arsc.flat",
-            "map": [
-                {
-                    "source": "/Users/admin/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.0.aar/403731ed16f9c5e899014bbb475b5483/res/values-v22/values-v22.xml",
-                    "from": {
-                        "startLines": "2,3,4,9",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,130,217,553",
-                        "endLines": "2,3,8,13",
-                        "endColumns": "74,86,12,12",
-                        "endOffsets": "125,212,548,896"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "/Users/admin/Desktop/FLUTTER/pistom_loja/build/app/intermediates/res/merged/debug/values-am_values-am.arsc.flat",
             "map": [
                 {
@@ -2074,6 +2058,22 @@
                         "startOffsets": "105,207,306,412,498,601,714,792,870,961,1054,1147,1241,1342,1435,1530,1624,1715,1805,1884,1984,2084,2180,2283,2382,2489,2642,5233",
                         "endColumns": "101,98,105,85,102,112,77,77,90,92,92,93,100,92,94,93,90,89,78,99,99,95,102,98,106,152,95,78",
                         "endOffsets": "202,301,407,493,596,709,787,865,956,1049,1142,1236,1337,1430,1525,1619,1710,1800,1879,1979,2079,2175,2278,2377,2484,2637,2733,5307"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/admin/Desktop/FLUTTER/pistom_loja/build/app/intermediates/res/merged/debug/values-v22_values-v22.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/admin/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.0.aar/403731ed16f9c5e899014bbb475b5483/res/values-v22/values-v22.xml",
+                    "from": {
+                        "startLines": "2,3,4,9",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,130,217,553",
+                        "endLines": "2,3,8,13",
+                        "endColumns": "74,86,12,12",
+                        "endOffsets": "125,212,548,896"
                     }
                 }
             ]
