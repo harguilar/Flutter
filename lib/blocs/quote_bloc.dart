@@ -94,6 +94,7 @@ class QuoteBloc extends BlocBase {
   @override
   void dispose() {
     _quotesController.close();
+    super.dispose();
   }
 
 }

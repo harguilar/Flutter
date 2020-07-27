@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/admin/Desktop/FLUTTER/pistom_loja/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-v21/values-v21.xml",
+            "outputFile": "/Users/admin/AndroidStudioProjects/pistom_loja/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-v21/values-v21.xml",
             "map": [
                 {
                     "source": "/Users/admin/.gradle/caches/transforms-1/files-1.1/core-1.1.0.aar/c7b3644bed4946293410a269b0a3c25b/res/values-v21/values-v21.xml",

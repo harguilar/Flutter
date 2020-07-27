@@ -9,13 +9,14 @@ class Order {
   DateTime date;
   double totalPrice;
   String vendorName;
+  String buyerId;
   String buyerName;
-  String imgUrl;
+  String vendorId;
   String vehicle;
 
   Order(
       {this.id, this.price, this.status, this.title, this.quantity,
-        this.date, this.totalPrice,this.vendorName,this.buyerName, this.imgUrl,this.vehicle});
+        this.date, this.totalPrice,this.vendorName, this.buyerId, this.buyerName,this.vendorId, this.vehicle});
 
   Order.fromDocument(DocumentSnapshot snapshot) {
     id = snapshot.documentID;
@@ -26,8 +27,9 @@ class Order {
     date = snapshot.data['date'].toDate();
     totalPrice = snapshot.data['totalPrice'].toDouble();
     vendorName = snapshot.data['vendorName'];
-    buyerName=snapshot.data['buyerName'];
-    imgUrl=snapshot.data['imgUrl'];
-    vehicle=snapshot.data['vehicle'];
+    vendorId =snapshot.data['vendorId'];
+    vehicle = snapshot.data['vehicle'];
+
   }
 }
+

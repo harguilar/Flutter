@@ -1,3 +1,4 @@
+
 name: gerente_loja
 description: A new Flutter application.
 
@@ -20,9 +21,9 @@ dependencies:
   flutter:
     sdk: flutter
   firebase_auth:
+  intl:
   flushbar: ^1.9.1
-  intl: ^0.16.0
-
+  firebase_messaging: ^6.0.16
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -31,7 +32,7 @@ dependencies:
   cloud_firestore: ^0.13.5
   firebase_core: ^0.4.0
   firebase_storage: ^3.1.1
-  image_picker: ^0.6.2+3
+  image_picker: ^0.6.4
   image_cropper: ^1.0.0
   flutter_speed_dial: ^1.1.1
   rxdart: ^0.23.1
@@ -41,10 +42,12 @@ dependencies:
   fluttertoast: ^4.0.1
   google_sign_in: ^4.4.4
   pin_code_fields: ^2.4.0
-  provider: ^3.2.0
+  provider: ^4.3.1
   scoped_model: ^1.0.1
   font_awesome_flutter: ^8.8.1
   data_connection_checker: ^0.3.4
+  get_it: ^4.0.4
+  nice_button: ^0.1.7
 
 
 
@@ -100,3 +103,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages
+

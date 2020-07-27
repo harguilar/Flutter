@@ -1,57 +1,83 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:gerente_loja/core/models/proforma.dart';
-
+import 'package:gerente_loja/helpers/const_global.dart';
 
 class ProformasProvider {
   var ref = Firestore.instance.collection("proformas");
   String userId;
 
-
-
-  ProformasProvider(){
+  ProformasProvider() {
     //ConstGlobal.getCurrentUser().then((value) => userId=value);
   }
 
   Future<List<Proforma>> getProformas() async {
-
-
     bool connectionState = await DataConnectionChecker().hasConnection;
 
     List<Proforma> _proformas;
+    final isVendor =await ConstGlobal.isVendor();
 
     if (connectionState) {
-      await ref.orderBy("date", descending: true).getDocuments().then((querySnap) {
-        _proformas = querySnap.documents.map((item) {
 
-          if(item["make"] != null){
-            return   Proforma(
-              id: item.data['id'],
-              date: Timestamp(
-                  item.data["date"].seconds, item.data["date"].nanoseconds)
-                  .toDate(),
-              status: item.data["status"],
-              userId: item.data["userId"].toString(),
-              year: item.data["year"],
-              make: item["make"],
-              model: item["model"],
-              trim: item["trim"],
-              imgUrl: item.data["imgUrl"].toString(),
-              peca: item.data["peca"].toString(),
-              userName: item.data["userName"]
-            );
+      if (isVendor) {
 
-          }
+        await ref.orderBy('date', descending: true).getDocuments()
 
+            .then((querySnapshot) {
+          _proformas = querySnapshot.documents.map((item) {
+            if (item["make"] != null) {
+              return Proforma(
+                id: item.data['id'],
+                date: Timestamp(item.data["date"].seconds,
+                        item.data["date"].nanoseconds)
+                    .toDate(),
+                status: item.data["status"],
+                userId: item.data["userId"].toString(),
+                year: item.data["year"],
+                make: item["make"],
+                model: item["model"],
+                trim: item["trim"],
+                imgUrl: item.data["imgUrl"].toString(),
+                peca: item.data["peca"].toString(),
+              );
+            }
+          }).toList();
+        });
+      } else {
+        await ref
+            .where('userId', isEqualTo: ConstGlobal.user.uid)
+            .orderBy('date', descending: true)
+            .getDocuments()
+            .then((querySnapshot) {
+          _proformas = querySnapshot.documents.map((item) {
+            if (item["make"] != null) {
+              return Proforma(
+                id: item.data['id'],
+                date: Timestamp(item.data["date"].seconds,
+                        item.data["date"].nanoseconds)
+                    .toDate(),
+                status: item.data["status"],
+                userId: item.data["userId"].toString(),
+                year: item.data["year"],
+                make: item["make"],
+                model: item["model"],
+                trim: item["trim"],
+                imgUrl: item.data["imgUrl"].toString(),
+                peca: item.data["peca"].toString(),
+              );
+            }
+          }).toList();
+        });
+      }
 
-        }).toList();
-      });
-      _proformas.removeWhere((element) => element==null);
+      _proformas.removeWhere((element) => element == null);
       return _proformas;
     } else {
       return List();
     }
   }
+
+
 
   saveProforma(Proforma proforma) async {
     await ref.document().setData(proforma.toJson());

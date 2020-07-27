@@ -1,306 +1,213 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gerente_loja/core/models/user_profile.dart';
 import 'package:gerente_loja/helpers/const_global.dart';
 import 'package:gerente_loja/ui/screens/login_screen.dart';
-
+import 'package:gerente_loja/ui/widgets/custom_app_bar.dart';
 
 
 class ProfileTab extends StatefulWidget {
+
   @override
   _ProfileTabState createState() => _ProfileTabState();
-  const ProfileTab({Key key}) : super(key: key);
+  const ProfileTab( {Key key}) : super(key: key);
 }
 
 class _ProfileTabState extends State<ProfileTab> {
-  String name = ConstGlobal.userData["name"],
+
+  bool isVendor;
+  Future<UserProfile> user;
+  /*String name = ConstGlobal.userData["name"],
       email = ConstGlobal.userData["email"],
       phone = ConstGlobal.userData["phone"],
-      address = ConstGlobal.userData["address"];
+      address = ConstGlobal.userData["address"];*/
+
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
+
+
+
+
   @override
   Widget build(BuildContext context) {
+    user= ConstGlobal.getUserProfile();
     final size = MediaQuery.of(context).size;
     return Scaffold(
         key: _scaffoldKey,
+        appBar: appBar(context,  'PERFIL DO UTILIZADOR'),
         body: Stack(
           children: <Widget>[
-            ClipPath(
-              child: Container(
-                  color: Theme.of(context).primaryColor),
-              clipper: GetClipper(),
-            ),
             Positioned(
                 width: 350.0,
                 top: size.height / 5,
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      width: size.width / 3.5,
-                      height: size.width / 3.5,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(75.0)),
-                          boxShadow: [
-                            BoxShadow(blurRadius: 7.0, color: Colors.black)
-                          ]),
-                      child: Center(
-                        child: Text(
-                          ConstGlobal.userData["name"]
-                              ?.toString()
-                              ?.substring(0, 1),
-                          style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontSize: 60,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 25.0),
-                    Text(
-                      ConstGlobal.userData["name"]?.toString() ?? "Sem nome",
-                      style: TextStyle(
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Montserrat'),
-                    ),
-                    SizedBox(height: 15.0),
-                    Text(
-                      ConstGlobal.userData["email"]?.toString() ?? "Sem E-mail",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Montserrat'),
-                    ),
-                    SizedBox(height: 15.0),
-                    Text(
-                      ConstGlobal.userData["phone"]?.toString() ??
-                          "Sem telefone",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Montserrat'),
-                    ),
-                    SizedBox(height: 30.0),
-                    Container(
-                        height: 30.0,
-                        width: 95.0,
-                        child: Material(
-                          borderRadius: BorderRadius.circular(20.0),
-                          shadowColor: Colors.greenAccent,
-                          color: Colors.green,
-                          elevation: 7.0,
-                          child: GestureDetector(
-                            onTap: () => showDialogEditProfile(),
-                            child: Center(
-                              child: Text(
-                                'Editar o perfil',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.bold),
+                child: FutureBuilder(
+                  future: user,
+                  builder: (context,snapshot){
+                    if(! snapshot.hasData)
+                      return Center(child: CircularProgressIndicator());
+                    else
+                      {
+                        // user= snapshot.data;
+                        return Column(
+                          children: <Widget>[
+                            Container(
+                              width: size.width / 3.5,
+                              height: size.width / 3.5,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.all(Radius.circular(75.0)),
+                                  boxShadow: [
+                                    BoxShadow(blurRadius: 7.0, color: Colors.black)
+                                  ]),
+                              child: Center(
+                                child: Text(
+                                  snapshot.data.name
+                                      ?.toString()
+                                      ?.substring(0, 1),
+                                  style: TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                      fontSize: 60,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
-                          ),
-                        )),
-                    SizedBox(height: 25.0),
-                    Container(
+                            SizedBox(height: 25.0),
+                            Text(
+                              snapshot.data.name?.toString() ?? "Sem nome",
+                              style: TextStyle(
+                                  fontSize: 30.0,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Montserrat'),
+                            ),
+                            SizedBox(height: 15.0),
+                            Text(
+                              snapshot.data.email?.toString() ?? "Sem E-mail",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Montserrat'),
+                            ),
+                            SizedBox(height: 15.0),
+                            Text(
+                              snapshot.data.phone?.toString() ??
+                                  "Sem telefone",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Montserrat'),
+                            ),
+                            SizedBox(height: 30.0),
+                            Container(
+                                height: 30.0,
+                                width: 95.0,
+                                child: Material(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  shadowColor: Theme.of(context).primaryColor,
+                                  color: Theme.of(context).primaryColor,
+                                  elevation: 7.0,
+                                  child: GestureDetector(
+                                    onTap: () => showDialogEditProfile(),
+                                    child: Center(
+                                      child: Text(
+                                        'Editar o perfil',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: 'Montserrat',
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                )),
+                            SizedBox(height: 25.0),
+                            Container(
+                                height: 30.0,
+                                width: 125.0,
+                                child: Material(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  shadowColor: Theme.of(context).primaryColor,
+                                  color: Theme.of(context).primaryColor,
+                                  elevation: 7.0,
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) => Center(
+                                            child: CircularProgressIndicator(),
+                                          ));
 
-                        height: 30.0,
-                        width: 150.0,
-                        child: Material(
-                          borderRadius: BorderRadius.circular(20.0),
-                          shadowColor: Colors.greenAccent,
-                          color: Colors.green,
-                          elevation: 7.0,
-                          child: GestureDetector(
-                            onTap: () => showDialogContactUs(),
-                            child: Center(
-                              child: Text(
-                                'Contactar Pistom',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.bold),
+                                      await FirebaseAuth.instance.signOut().then((_) {
+                                        Navigator.pop(context);
+
+                                        Navigator.of(context).pushAndRemoveUntil(
+                                            MaterialPageRoute(
+                                                builder: (context) => LoginScreen()),
+                                                (Route<dynamic> route) => false);
+                                      });
+                                    },
+                                    child: Center(
+                                      child: Text(
+                                        'Terminar sessão',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: 'Montserrat',
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                )),
+                            SizedBox(height: 25.0),
+                            /* Container(
+                          height: 30.0,
+                          width: 150.0,
+                          child: Material(
+                            borderRadius: BorderRadius.circular(20.0),
+                            shadowColor: Colors.green,
+                            color: Colors.green,
+                            elevation: 7.0,
+                            child: GestureDetector(
+                              onTap: () {
+
+
+
+
+
+                              },
+                              child: Center(
+                                child: Text(
+                                  'Contactar a Pistom',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Montserrat',
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
-                          ),
-                        )),
-                    SizedBox(height: 25.0),
-                    Container(
-                        height: 30.0,
-                        width: 125.0,
-                        child: Material(
-                          borderRadius: BorderRadius.circular(20.0),
-                          shadowColor: Colors.greenAccent,
-                          color: Colors.green,
-                          elevation: 7.0,
-                          child: GestureDetector(
-                            onTap: () async {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => Center(
-                                    child: CircularProgressIndicator(),
-                                  ));
+                          )),*/
+                            SizedBox(height: 25.0),
+                          ],
+                        );
 
-                              await FirebaseAuth.instance.signOut().then((_) {
-                                Navigator.pop(context);
 
-                                Navigator.of(context).pushAndRemoveUntil(
-                                    MaterialPageRoute(
-                                        builder: (context) => LoginScreen()),
-                                        (Route<dynamic> route) => false);
-                              });
-                            },
-                            child: Center(
-                              child: Text(
-                                'Terminar sessão',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                        )),
-                    SizedBox(height: 25.0),
-                    /* Container(
-                        height: 30.0,
-                        width: 150.0,
-                        child: Material(
-                          borderRadius: BorderRadius.circular(20.0),
-                          shadowColor: Colors.green,
-                          color: Colors.green,
-                          elevation: 7.0,
-                          child: GestureDetector(
-                            onTap: () {
+
+                      }
 
 
 
 
+                  },
 
-                            },
-                            child: Center(
-                              child: Text(
-                                'Contactar a Pistom',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                        )),*/
-                    SizedBox(height: 25.0),
-                  ],
-                ))
+                )
+
+            )
           ],
         ));
   }
 
-
-
-  showDialogContactUs() => showDialog(
-      context: context,
-      builder: (context) {
-
-        TextEditingController _messController = TextEditingController();
-        return AlertDialog(
-          title: Text("Contactar a Pistom"),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                /*
-                TextFormField(
-                  controller: messController,
-                  decoration: InputDecoration(
-                      labelText: "Escreva aqui a sua Mensagem", border: OutlineInputBorder()),
-                  onChanged: (value){},
-                ),*/
-                Card(
-
-                    child: Padding(
-                      padding: EdgeInsets.all(4.0),
-                      child: TextField(
-                        controller: _messController,
-                        maxLines: 15,
-                        decoration: InputDecoration.collapsed(hintText: "Insira aqui a sua mensagem"),
-                          keyboardType: TextInputType.multiline
-                      ),
-                    )
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-
-
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text("Enviar"),
-              onPressed: () async {
-                showDialog(
-                    context: context,
-                    builder: (context) => Center(
-                      child: CircularProgressIndicator(),
-                    ));
-
-
-                Map<String, dynamic> userMessage ={
-                  'text' :_messController.text,
-                  'date':DateTime.now()
-
-                };
-
-                await Firestore.instance
-                    .collection("users")
-                    .document(ConstGlobal.user.uid).collection('supportMessages').document()
-                    .setData(userMessage)
-
-                    .then((_) {
-                  setState(() {
-                   // ConstGlobal.userData = userData;
-                  });
-
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-
-                  _scaffoldKey.currentState.showSnackBar(
-                      SnackBar(content: Text("Mensagem enviada com successo !Vamos entrar em contacto")));
-                }).catchError((e) {
-                  print(e.toString());
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-
-                  _scaffoldKey.currentState.showSnackBar(SnackBar(
-                      backgroundColor: Colors.red,
-                      content: Text(
-                        "Ocorreu um erro, tente mais tarde",
-                        style: TextStyle(color: Colors.white),
-                      )));
-                });
-              },
-            ),
-            FlatButton(
-              child: Text("Cancelar"),
-              onPressed: () => Navigator.pop(context),
-            )
-          ],
-        );
-      });
-
-
-
-
-
-
-
   showDialogEditProfile() => showDialog(
       context: context,
       builder: (context) {
+          UserProfile newUser;
         return AlertDialog(
           title: Text("Editar Perfil"),
           content: SingleChildScrollView(
@@ -311,7 +218,7 @@ class _ProfileTabState extends State<ProfileTab> {
                   initialValue: ConstGlobal.userData["name"],
                   decoration: InputDecoration(
                       labelText: "Nome", border: OutlineInputBorder()),
-                  onChanged: (value) => name = value,
+                  onChanged: (value) =>newUser.name = value,
                 ),
                 SizedBox(
                   height: 10,
@@ -320,7 +227,7 @@ class _ProfileTabState extends State<ProfileTab> {
                   initialValue: ConstGlobal.userData["email"],
                   decoration: InputDecoration(
                       labelText: "E-mail", border: OutlineInputBorder()),
-                  onChanged: (value) => email = value,
+                  onChanged: (value) =>  newUser.email = value,
                 ),
                 SizedBox(
                   height: 10,
@@ -329,7 +236,7 @@ class _ProfileTabState extends State<ProfileTab> {
                   initialValue: ConstGlobal.userData["phone"],
                   decoration: InputDecoration(
                       labelText: "Telefone", border: OutlineInputBorder()),
-                  onChanged: (value) => phone = value,
+                  onChanged: (value) =>  newUser.phone = value,
                 ),
                 SizedBox(
                   height: 10,
@@ -338,55 +245,63 @@ class _ProfileTabState extends State<ProfileTab> {
                   initialValue: ConstGlobal.userData["address"],
                   decoration: InputDecoration(
                       labelText: "Endereço", border: OutlineInputBorder()),
-                  onChanged: (value) => address = value,
+                  onChanged: (value) =>  newUser.address = value,
                 )
               ],
             ),
           ),
           actions: <Widget>[
-            FlatButton(
-              child: Text("Salvar"),
-              onPressed: () async {
-                showDialog(
-                    context: context,
-                    builder: (context) => Center(
-                      child: CircularProgressIndicator(),
-                    ));
+            StreamBuilder<DataConnectionStatus>(
+              stream: DataConnectionChecker().onStatusChange,
+              builder: (context,snapshot){
+                if(snapshot.data==DataConnectionStatus.disconnected){
 
-                Map<String, dynamic> userData = {
-                  "name": name,
-                  "email": email,
-                  "phone": phone,
-                  "address": address
-                };
+                  return Text('Sem internet!');
 
-                await Firestore.instance
-                    .collection("users")
-                    .document(ConstGlobal.user.uid)
-                    .updateData(userData)
-                    .then((_) {
-                  setState(() {
-                    ConstGlobal.userData = userData;
-                  });
+                }
+                else
+                  return FlatButton(
+                    child: Text("Salvar"),
+                    onPressed: () async {
+                      showDialog(
+                          context: context,
+                          builder: (context) => Center(
+                            child: CircularProgressIndicator(),
+                          ));
 
-                  Navigator.pop(context);
-                  Navigator.pop(context);
 
-                  _scaffoldKey.currentState.showSnackBar(
-                      SnackBar(content: Text("Dados editados com successo !")));
-                }).catchError((e) {
-                  print(e.toString());
-                  Navigator.pop(context);
-                  Navigator.pop(context);
 
-                  _scaffoldKey.currentState.showSnackBar(SnackBar(
-                      backgroundColor: Colors.red,
-                      content: Text(
-                        "Ocorreu um erro, tente mais tarde",
-                        style: TextStyle(color: Colors.white),
-                      )));
-                });
+                      await Firestore.instance
+                          .collection("users")
+                          .document(ConstGlobal.user.uid)
+                          .updateData(newUser.toJson())
+                          .then((_) {
+                        setState(() {
+                          ConstGlobal.userData = newUser.toJson();
+                        });
+
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+
+                        _scaffoldKey.currentState.showSnackBar(
+                            SnackBar(content: Text("Dados editados com successo !")));
+                      }).catchError((e) {
+                        print(e.toString());
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+
+                        _scaffoldKey.currentState.showSnackBar(SnackBar(
+                            backgroundColor: Colors.red,
+                            content: Text(
+                              "Ocorreu um erro, tente mais tarde",
+                              style: TextStyle(color: Colors.white),
+                            )));
+                      });
+                    },
+                  );
+
               },
+
             ),
             FlatButton(
               child: Text("Cancelar"),
@@ -396,20 +311,3 @@ class _ProfileTabState extends State<ProfileTab> {
         );
       });
 } //End of my state class
-
-class GetClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = new Path();
-
-    path.lineTo(0.0, size.height / 2.2);
-    path.lineTo(size.width + 125, 0.0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return true;
-  }
-}

@@ -52,12 +52,28 @@ class ProformasController extends BlocBase {
     );
   }
 
+ /* Future<void> getProformasReplied() {
+    if (_isDisposed) {
+      return null;
+    }
+    return _provider.getProformasReplied().then(
+            (dados) {
+          if (dados != null) {
+            proformasList = dados;
+            _proformaController.sink.add(dados);
+          }
+        }
+    );
+  }
+*/
 
+
+/*
   @override
   void dispose() {
-    /*_proformaController.close();
-    _controllerSaveProforma.close();*/
+    _proformaController.close();
+    _controllerSaveProforma.close();
     _isDisposed = true;
     super.dispose();
-  }
+  }*/
 }

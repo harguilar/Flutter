@@ -90,6 +90,7 @@ class CategoryBloc extends BlocBase {
     _titleController.close();
     _imageController.close();
     _deleteController.close();
+    super.dispose();
   }
 
 

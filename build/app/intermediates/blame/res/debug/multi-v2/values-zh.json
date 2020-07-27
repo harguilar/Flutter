@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/admin/Desktop/FLUTTER/pistom_loja/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-zh/values-zh.xml",
+            "outputFile": "/Users/admin/AndroidStudioProjects/pistom_loja/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-zh/values-zh.xml",
             "map": [
                 {
-                    "source": "/Users/admin/.gradle/caches/transforms-1/files-1.1/jetified-ucrop-2.2.2.aar/a3126dde8f2f6074ce51af92a9f556da/res/values-zh/values-zh.xml",
+                    "source": "/Users/admin/.gradle/caches/transforms-1/files-1.1/jetified-ucrop-2.2.2.aar/23c2ac15294885c715cbc1fba533b469/res/values-zh/values-zh.xml",
                     "from": {
                         "startLines": "2,3,4",
                         "startColumns": "4,4,4",

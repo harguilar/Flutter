@@ -43,12 +43,12 @@ class Repository {
   }
 
   updateQuote(Proforma proformaModel) async {
-    await collection.document(proformaModel.userId).setData(proformaModel.toJson() ,merge: true);
+    await collection.document(proformaModel.id).setData(proformaModel.toJson() ,merge: true);
   }
 
   addReply(Reply reply,Proforma proformaModel) async{
 
-    await collection.document(proformaModel.userId).collection('replies').document(reply.vendorId).setData(reply.toJson());
+    await collection.document(proformaModel.id).collection('replies').document(reply.vendorId).setData(reply.toJson());
 
   }
 }

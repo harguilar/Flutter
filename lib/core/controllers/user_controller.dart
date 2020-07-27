@@ -1,68 +1,102 @@
-import 'dart:async';
 import 'package:bloc_pattern/bloc_pattern.dart';
-import 'package:gerente_loja/core/models/user.dart';
-import 'package:gerente_loja/core/providers/user_provider.dart';
-
-
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:rxdart/rxdart.dart';
 
 class UserController extends BlocBase {
 
-  UserProvider _provider = UserProvider();
-  List<User> userList = List();
-  bool _isDisposed = false;
+  final _usersController = BehaviorSubject<List>();
 
-  StreamController<List<User>> _userController = StreamController<
-      List<User>>.broadcast();
-  StreamController<User> _controllerSaveUser = StreamController<
-      User>();
+  Stream<List> get outUsers => _usersController.stream;
 
-  //Stream gets the data from this StreamController(output)
-  Stream<List<User>> get outProformas => _userController.stream;
+  Map<String, Map<String, dynamic>> _users = {};
 
-  //Sink puts data into the StreamController(inPut)
-  StreamSink<List<User>> get inProformas => _userController.sink;
+  Firestore _firestore = Firestore.instance;
 
-
-  StreamSink<User> get saveProforma => _controllerSaveUser.sink;
-
-  UserController() {
-    _userController.add(userList);
-    _controllerSaveUser.stream.listen(_saveUserData);
+  UserController(){
+    _addUsersListener();
   }
 
-
-  _saveUserData(User user) {
-    _provider.saveUser(user);
-    userList.add(user);
-    inProformas.add(userList);
-  }
-
-  Future<void> getUsers() {
-    if (_isDisposed) {
-      return null;
+  void onChangedSearch(String search){
+    if(search.trim().isEmpty){
+      _usersController.add(_users.values.toList());
+    } else {
+      _usersController.add(_filter(search.trim()));
     }
-    return _provider.getUsers().then(
-            (dados) {
-          if (dados != null) {
-            userList = dados;
-            _userController.sink.add(dados);
-          }
+  }
+
+  List<Map<String, dynamic>> _filter(String search){
+    List<Map<String, dynamic>> filteredUsers = List.from(_users.values.toList());
+    filteredUsers.retainWhere((user){
+      return user["name"].toUpperCase().contains(search.toUpperCase());
+    });
+    return filteredUsers;
+  }
+
+  void _addUsersListener(){
+    _firestore.collection("users").snapshots().listen((snapshot){
+      snapshot.documentChanges.forEach((change){
+
+        String uid = change.document.documentID;
+
+        switch(change.type){
+          case DocumentChangeType.added:
+            _users[uid] = change.document.data;
+            _subscribeToOrders(uid);
+            break;
+          case DocumentChangeType.modified:
+            _users[uid].addAll(change.document.data);
+            _usersController.add(_users.values.toList());
+            break;
+          case DocumentChangeType.removed:
+            _users.remove(uid);
+            _unsubscribeToOrders(uid);
+            _usersController.add(_users.values.toList());
+            break;
         }
-    );
+
+      });
+    });
   }
 
-  Future<User> getUserById(String uid)async {
-    return await _provider.getUserById(uid);
 
+  void _subscribeToOrders(String uid){
+    _users[uid]["subscription"] = _firestore.collection("users").document(uid)
+        .collection("orders").snapshots().listen((orders) async {
+
+      int numOrders = orders.documents.length;
+
+      double money = 0.0;
+
+      for(DocumentSnapshot d in orders.documents){
+        DocumentSnapshot order = await _firestore
+            .collection("orders").document(d.documentID).get();
+
+        if(order.data == null) continue;
+
+        money += order.data["totalPrice"];
+      }
+
+      _users[uid].addAll(
+          {"money": money, "orders": numOrders}
+      );
+
+      _usersController.add(_users.values.toList());
+    });
   }
 
+  Map<String, dynamic> getUser(String uid){
+    return _users[uid];
+    //_usersController.add(event)
+  }
+
+  void _unsubscribeToOrders(String uid){
+    _users[uid]["subscription"].cancel();
+  }
 
   @override
   void dispose() {
-    _userController.close();
-    _controllerSaveUser.close();
-    _isDisposed = true;
-    super.dispose();
+    _usersController.close();
   }
+
 }

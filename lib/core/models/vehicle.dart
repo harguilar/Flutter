@@ -1,14 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
-class Vehicle{
+class Vehicle {
   final String icon;
   final String make;
   final String model;
   final String trim;
   final int year;
   final String vinNumber;
-
-
 
   Vehicle({@required this.icon,
     @required this.make,@required this.model,@required this.trim,@required this.year,@required this.vinNumber} );
@@ -24,5 +22,4 @@ class Vehicle{
         vinNumber: json["vinNumber"] as String
     );
   }
-
 }

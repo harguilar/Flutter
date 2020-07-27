@@ -1,11 +1,11 @@
 import 'dart:async';
-import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:gerente_loja/core/models/vehicle.dart';
 import 'package:gerente_loja/core/models/vehicle_user.dart';
 import 'package:gerente_loja/repository/repository.dart';
+import 'package:flutter/cupertino.dart';
 
 
-class VehicleController extends BlocBase {
+class VehicleController extends ChangeNotifier {
 
 
   Repository _provider = Repository();
@@ -26,7 +26,9 @@ class VehicleController extends BlocBase {
     return _provider.getVehicleByUser().then(
             (dados) {
           if(dados != null) userVehiclesList = dados;
-          _controller.sink.add(dados);
+          notifyListeners();
+          return userVehiclesList;
+
         }
     );
   }
@@ -36,7 +38,8 @@ class VehicleController extends BlocBase {
     return _provider.getVehicleById(vId).then(
             (dados) {
           if(dados != null) vehicle = dados;
-          _controllerVehicle.sink.add(dados);
+          notifyListeners();
+          return vehicle;
         }
     );
   }
@@ -47,6 +50,6 @@ class VehicleController extends BlocBase {
   @override
   void dispose() {
     // _controller.close();
-    super.dispose();
+    //super.dispose();
   }
 }

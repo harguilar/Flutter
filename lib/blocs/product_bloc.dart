@@ -103,6 +103,7 @@ class ProductBloc extends BlocBase {
     _dataController.close();
     _loadingController.close();
     _createdController.close();
+    super.dispose();
   }
 
 }

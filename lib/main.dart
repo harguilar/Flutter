@@ -1,47 +1,56 @@
-import 'package:bloc_pattern/bloc_pattern.dart';
-import 'package:flutter/material.dart';
-import 'package:gerente_loja/ui/screens/login_screen.dart';
-import 'package:scoped_model/scoped_model.dart';
 
+import 'package:gerente_loja/core/models/crudModel.dart';
+import 'package:gerente_loja/ui/screens/landing_screen.dart';
+import 'package:gerente_loja/ui/screens/loginPage.dart';
+import 'package:gerente_loja/ui/screens/login_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+import 'core/controllers/login_controller.dart';
 import 'core/controllers/orders_controller.dart';
 import 'core/controllers/proformas_controller.dart';
+import 'core/controllers/reply_controller.dart';
 import 'core/controllers/user_controller.dart';
 import 'core/controllers/vehicle_controller.dart';
-import 'core/models/user_model.dart';
-
-
+import 'core/models/user.dart';
+import 'locator.dart';
 void main() => runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => UserModel(),
+          //create: (_) => UserModel(),
+        ),
+        // Provider (create: (_) => UserModel()),
+        ChangeNotifierProvider(
+          create: (_) => VehicleController(),
+          //create: (_) => UserModel(),
+        ),
 
-    //Firestore.instance.collection('').document('doc').setData({"texto":"daniel"});
+        ChangeNotifierProvider(
+          create: (_) => locator<CRUDModel>(),
+          //create: (_) => UserModel(),
+        ),
 
-    MyApp());
+        Provider (create: (_) => ProformasController()),
+        Provider (create: (_) => UserController()),
+        Provider (create: (_) => OrdersController()),
+        Provider (create: (_) => ReplyController()),
+      ],
+      child:MyApp(),
+    )
+
+  );
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ScopedModel<UserModel>(
-      model: UserModel(),
-      child: ScopedModelDescendant<UserModel>(
-        builder: (context, child, model) {
-          return BlocProvider(
-            blocs: [
-              Bloc((x) => VehicleController()),
-              Bloc((x) => ProformasController()),
-              Bloc((x) => UserController()),
-              Bloc((x)=>OrdersController())
-            ],
-            child: MaterialApp(
-              title: 'PISTOM',
-              theme: ThemeData(
-                  primaryColor: Colors.blueGrey,
-                  iconTheme: IconThemeData(color: Colors.blue)),
-              debugShowCheckedModeBanner: false,
-              home: LoginScreen(),
-              //LoginScreen(),
-            ),
-          );
-        },
-      ),
+    return MaterialApp (
+      debugShowCheckedModeBanner: false,
+      title: 'Piston',
+      home: LandingScreen(),
     );
   }
 }
+
+
+

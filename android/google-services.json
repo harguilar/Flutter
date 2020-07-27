@@ -1,35 +1,58 @@
 {
   "project_info": {
-    "project_number": "149423317724",
-    "firebase_url": "https://lojaflutter-6f4d5.firebaseio.com",
-    "project_id": "lojaflutter-6f4d5",
-    "storage_bucket": "lojaflutter-6f4d5.appspot.com"
+    "project_number": "680609448660",
+    "firebase_url": "https://pistom-fdd86.firebaseio.com",
+    "project_id": "pistom-fdd86",
+    "storage_bucket": "pistom-fdd86.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:149423317724:android:344e81786443808e6eca19",
+        "mobilesdk_app_id": "1:680609448660:android:c80eb3a0755bfdb4bff141",
         "android_client_info": {
-          "package_name": "ao.co.manenga.lojavirtual"
+          "package_name": "com.pistom.pistom"
         }
       },
       "oauth_client": [
         {
-          "client_id": "149423317724-8tuv2c9lcag39iu6ot8qbj1q9vofu2mj.apps.googleusercontent.com",
+          "client_id": "680609448660-g9otk1467ul7a35qcaml3a8fraivmhrl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pistom.pistom",
+            "certificate_hash": "6539280678b73b6b41893ab00e177035cc49775a"
+          }
+        },
+        {
+          "client_id": "680609448660-pq9mmk1jghakn6hnaal22vcv69ig5ms5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pistom.pistom",
+            "certificate_hash": "5f716a5196241e520ce17f4176af74d11c018a62"
+          }
+        },
+        {
+          "client_id": "680609448660-b7vldcavq1p798r9uaqjojifnmnoacft.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDHqTx3qBnkSPhaNoMbP77XWgO1gnNU5Vc"
+          "current_key": "AIzaSyBtlqa1lXO3zB7RgkiUgaTXVckqLT3YrHI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "149423317724-8tuv2c9lcag39iu6ot8qbj1q9vofu2mj.apps.googleusercontent.com",
+              "client_id": "680609448660-b7vldcavq1p798r9uaqjojifnmnoacft.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "680609448660-c37sp2ee0rm53c7bna4cektrmkrphu6q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "pistonLoja"
+              }
             }
           ]
         }

@@ -79,6 +79,7 @@ class OrdersBloc extends BlocBase {
   @override
   void dispose() {
     _ordersController.close();
+    super.dispose();
   }
 
 }
