@@ -24,7 +24,13 @@ dependencies:
   intl:
   flushbar: ^1.9.1
   firebase_messaging: ^6.0.16
-
+  stacked: ^1.7.6
+  build_runner: ^1.5.0
+  auto_route: ^0.6.7
+  auto_route_generator: ^0.6.8
+  analyzer: ^0.39.14
+  data_connection_checker: ^0.3.4
+  uuid: ^2.2.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -45,9 +51,18 @@ dependencies:
   provider: ^4.3.1
   scoped_model: ^1.0.1
   font_awesome_flutter: ^8.8.1
-  data_connection_checker: ^0.3.4
   get_it: ^4.0.4
   nice_button: ^0.1.7
+  dropdown_formfield: ^0.1.2
+  dropdownfield: ^1.0.3
+  splashscreen: ^1.2.0
+  route_annotation: ^0.2.0
+  argon_buttons_flutter: ^1.0.6
+  shared_preferences: ^0.5.10
+  flutter_spinkit: ^4.1.2
+  stacked_services: ^0.5.2
+  numeric_keyboard: ^1.0.0
+
 
 
 
@@ -55,6 +70,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.7.5
+  build_runner: ^1.5.0
 flutter_icons:
   image_path: "assets/logo.png"
   ios: true
@@ -72,6 +88,20 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/images/
+  fonts:
+    - family: Pacifico
+      fonts:
+        - asset: fonts/Pacifico-Regular.ttf
+    - family: SourceSansPro
+      fonts:
+        - asset: fonts/SourceSansPro-Regular.ttf
+        - asset: fonts/SourceSansPro-Black.ttf
+        - asset: fonts/SourceSansPro-BlackItalic.ttf
+        - asset: fonts/SourceSansPro-Bold.ttf
+        - asset: fonts/SourceSansPro-Italic.ttf
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

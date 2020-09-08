@@ -1,3 +1,4 @@
+/*
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,10 +20,12 @@ class _ProfileTabState extends State<ProfileTab> {
 
   bool isVendor;
   Future<UserProfile> user;
-  /*String name = ConstGlobal.userData["name"],
+  */
+/*String name = ConstGlobal.userData["name"],
       email = ConstGlobal.userData["email"],
       phone = ConstGlobal.userData["phone"],
-      address = ConstGlobal.userData["address"];*/
+      address = ConstGlobal.userData["address"];*//*
+
 
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
@@ -157,7 +160,8 @@ class _ProfileTabState extends State<ProfileTab> {
                                   ),
                                 )),
                             SizedBox(height: 25.0),
-                            /* Container(
+                            */
+/* Container(
                           height: 30.0,
                           width: 150.0,
                           child: Material(
@@ -183,7 +187,8 @@ class _ProfileTabState extends State<ProfileTab> {
                                 ),
                               ),
                             ),
-                          )),*/
+                          )),*//*
+
                             SizedBox(height: 25.0),
                           ],
                         );
@@ -311,3 +316,4 @@ class _ProfileTabState extends State<ProfileTab> {
         );
       });
 } //End of my state class
+*/

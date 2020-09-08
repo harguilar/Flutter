@@ -1,53 +1,32 @@
-
-import 'package:gerente_loja/core/models/crudModel.dart';
-import 'package:gerente_loja/ui/screens/landing_screen.dart';
-import 'package:gerente_loja/ui/screens/loginPage.dart';
-import 'package:gerente_loja/ui/screens/login_screen.dart';
-import 'package:provider/provider.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:gerente_loja/ui/views/loginPage.dart';
+import 'package:gerente_loja/ui/views/brands_screen.dart';
+import 'package:gerente_loja/ui/views/startup_view.dart';
 import 'package:flutter/material.dart';
-import 'core/controllers/login_controller.dart';
-import 'core/controllers/orders_controller.dart';
-import 'core/controllers/proformas_controller.dart';
-import 'core/controllers/reply_controller.dart';
-import 'core/controllers/user_controller.dart';
-import 'core/controllers/vehicle_controller.dart';
-import 'core/models/user.dart';
+import 'package:gerente_loja/routes/router.gr.dart' as r;
 import 'locator.dart';
-void main() => runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => UserModel(),
-          //create: (_) => UserModel(),
-        ),
-        // Provider (create: (_) => UserModel()),
-        ChangeNotifierProvider(
-          create: (_) => VehicleController(),
-          //create: (_) => UserModel(),
-        ),
 
-        ChangeNotifierProvider(
-          create: (_) => locator<CRUDModel>(),
-          //create: (_) => UserModel(),
-        ),
-
-        Provider (create: (_) => ProformasController()),
-        Provider (create: (_) => UserController()),
-        Provider (create: (_) => OrdersController()),
-        Provider (create: (_) => ReplyController()),
-      ],
-      child:MyApp(),
-    )
-
+void main() {
+  //Register Service Models.
+  setupLocator();
+    runApp(
+       MyApp(),
   );
-
+}
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp (
+
       debugShowCheckedModeBanner: false,
+
+      builder: ExtendedNavigator.builder(
+
+        router: r.Router(),
+      ),
       title: 'Piston',
-      home: LandingScreen(),
+      home: brandsScreens(),
     );
   }
 }

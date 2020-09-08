@@ -11,6 +11,8 @@ class ImagesWidget extends FormField<List> {
     FormFieldValidator<List> validator,
     List initialValue,
     bool autoValidate = false,
+    String url
+
   }) : super(
     onSaved: onSaved,
     validator: validator,
@@ -47,12 +49,14 @@ class ImagesWidget extends FormField<List> {
                     color: Colors.white.withAlpha(50),
                   ),
                   onTap: (){
+
                     showModalBottomSheet(context: context,
                       builder: (context) => ImageSourceSheet(
                         onImageSelected: (image){
                           state.didChange(state.value..add(image));
                           Navigator.of(context).pop();
                         },
+                        url: url,
                       )
                     );
                   },

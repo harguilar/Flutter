@@ -46,8 +46,8 @@
 @import google_sign_in;
 #endif
 
-#if __has_include(<image_cropper/ImageCropperPlugin.h>)
-#import <image_cropper/ImageCropperPlugin.h>
+#if __has_include(<image_cropper/FLTImageCropperPlugin.h>)
+#import <image_cropper/FLTImageCropperPlugin.h>
 #else
 @import image_cropper;
 #endif
@@ -56,6 +56,12 @@
 #import <image_picker/FLTImagePickerPlugin.h>
 #else
 @import image_picker;
+#endif
+
+#if __has_include(<shared_preferences/FLTSharedPreferencesPlugin.h>)
+#import <shared_preferences/FLTSharedPreferencesPlugin.h>
+#else
+@import shared_preferences;
 #endif
 
 @implementation GeneratedPluginRegistrant
@@ -70,6 +76,7 @@
   [FLTGoogleSignInPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleSignInPlugin"]];
   [FLTImageCropperPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTImageCropperPlugin"]];
   [FLTImagePickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTImagePickerPlugin"]];
+  [FLTSharedPreferencesPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSharedPreferencesPlugin"]];
 }
 
 @end
