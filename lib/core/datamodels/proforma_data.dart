@@ -19,7 +19,7 @@ class ProformaData{
   String make;
   String model;
   String trim;
-  int year;
+  String year;
   var imageFileName;
 
 
@@ -29,6 +29,8 @@ class ProformaData{
     @required this.model,
     @required this.peca,
     @required this.vinNumber,
+    @required this.year,
+    @required this.trim
    // @required this.imgUrl,
   });
 

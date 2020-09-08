@@ -9,7 +9,6 @@ class PushNotificationService{
           //Request for Permissions
           _fcm.requestNotificationPermissions(IosNotificationSettings());
         }
-
         //Fire up the Cloud Base Function Internally
      _fcm.configure(
        //Called when the app is on the foreground and we receive a push notification.

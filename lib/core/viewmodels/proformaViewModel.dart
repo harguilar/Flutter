@@ -54,13 +54,15 @@ class ProformaViewModel extends BaseViewModel {
         title: title,
     );
   }
-  getProfData({String make, String model, String vinNumber, String peca, String url})
+  getProfData({String make, String model, String vinNumber, String peca, String year, String trim})
   {
        // if (imgUrl != null){}
        _profData.make = make;
        _profData.model = model;
        _profData.vinNumber = vinNumber;
        _profData.peca = peca;
+       _profData.year = year;
+       _profData.trim = trim;
       // _profData.imgUrl =  _cloudStorageService.urlImage(imageUrl);
       // _profData.imgUrl =  url;
 

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/pistom_loja.iml" filepath="$PROJECT_DIR$/.idea/pistom_loja.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/pistom.iml" filepath="$PROJECT_DIR$/.idea/pistom.iml" />
     </modules>
   </component>
 </project>

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/admin/AndroidStudioProjects/pistom_loja/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-sk/values-sk.xml",
+            "outputFile": "/Users/admin/AndroidStudioProjects/pistom/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-sk/values-sk.xml",
             "map": [
                 {
                     "source": "/Users/admin/.gradle/caches/transforms-2/files-2.1/6d05693e8e21094c04e65d5b855f43ef/jetified-ucrop-2.2.5/res/values-sk/values-sk.xml",

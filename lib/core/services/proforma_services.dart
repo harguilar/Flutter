@@ -11,11 +11,14 @@ class ProformaServices{
     _db.collection("proformas").add(
         {
           //"make" :userId,
-          "make" :_dataSet.make,
-          "model":_dataSet.model,
+          "make" : _dataSet.make,
+          "model": _dataSet.model,
           "peca" : _dataSet.peca,
           "chassis":_dataSet.vinNumber,
           'image': url,
+          'year': _dataSet.year,
+          'trim': _dataSet.trim
+
         }).then((value){
       print("success!");
     });

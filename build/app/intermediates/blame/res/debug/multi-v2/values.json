@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/admin/AndroidStudioProjects/pistom_loja/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "outputFile": "/Users/admin/AndroidStudioProjects/pistom/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
             "map": [
                 {
                     "source": "/Users/admin/.gradle/caches/transforms-2/files-2.1/6d05693e8e21094c04e65d5b855f43ef/jetified-ucrop-2.2.5/res/values/values.xml",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/admin/AndroidStudioProjects/pistom_loja/android/app/src/main/res/values/styles.xml",
+                    "source": "/Users/admin/AndroidStudioProjects/pistom/android/app/src/main/res/values/styles.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -114,23 +114,6 @@
                     }
                 },
                 {
-                    "source": "/Users/admin/AndroidStudioProjects/pistom_loja/build/app/generated/res/google-services/debug/values/values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,199,306,388,492,601,721,817",
-                        "endColumns": "143,106,81,103,108,119,95,72",
-                        "endOffsets": "194,301,383,487,596,716,812,885"
-                    },
-                    "to": {
-                        "startLines": "361,363,364,365,366,367,368,369",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "24952,25178,25285,25367,25471,25580,25700,25796",
-                        "endColumns": "143,106,81,103,108,119,95,72",
-                        "endOffsets": "25091,25280,25362,25466,25575,25695,25791,25864"
-                    }
-                },
-                {
                     "source": "/Users/admin/.gradle/caches/transforms-2/files-2.1/e66da8b5301e9a6b4d099a6eed9ee5b8/jetified-appcompat-resources-1.1.0/res/values/values.xml",
                     "from": {
                         "startLines": "2,29,36,47,74",
@@ -166,6 +149,23 @@
                         "endLines": "27,28,29,30,31,32,33,34,343,344,345,346,347,348,349,350,352,353,354,355,356,357,358,359,360,2879,3135",
                         "endColumns": "89,79,89,89,79,80,79,79,104,180,124,106,179,122,115,102,187,104,180,124,174,147,62,61,78,20,20",
                         "endOffsets": "1964,2044,2134,2224,2304,2385,2465,2545,22719,22900,23025,23132,23312,23435,23551,23654,24009,24114,24295,24420,24595,24743,24806,24868,24947,184218,196275"
+                    }
+                },
+                {
+                    "source": "/Users/admin/AndroidStudioProjects/pistom/build/app/generated/res/google-services/debug/values/values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,199,306,388,492,601,721,817",
+                        "endColumns": "143,106,81,103,108,119,95,72",
+                        "endOffsets": "194,301,383,487,596,716,812,885"
+                    },
+                    "to": {
+                        "startLines": "361,363,364,365,366,367,368,369",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "24952,25178,25285,25367,25471,25580,25700,25796",
+                        "endColumns": "143,106,81,103,108,119,95,72",
+                        "endOffsets": "25091,25280,25362,25466,25575,25695,25791,25864"
                     }
                 },
                 {

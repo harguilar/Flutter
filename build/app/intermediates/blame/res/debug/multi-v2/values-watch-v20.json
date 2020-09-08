@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/admin/AndroidStudioProjects/pistom_loja/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "/Users/admin/AndroidStudioProjects/pistom/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
                     "source": "/Users/admin/.gradle/caches/transforms-2/files-2.1/755fd0ac11c2010d270a04a52f954796/jetified-play-services-auth-16.0.1/res/values-watch-v20/values.xml",

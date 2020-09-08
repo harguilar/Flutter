@@ -192,7 +192,6 @@ class _ProformaScreenState extends State<ProformaScreen> {
       autofocus: true,
     );
   }
-
   //LoginScreen(this.product);
   @override
   Widget build(BuildContext context) {
@@ -283,7 +282,11 @@ class _ProformaScreenState extends State<ProformaScreen> {
                           size: 45,
                           color: Colors.white,
                         )
-                            : Image.file(modelView.selectedImage),
+                            : Image.file(
+                              modelView.selectedImage,
+                              height: 150,
+                              width: 180,
+                        ),
                       ),
                     ),
 
@@ -314,17 +317,19 @@ class _ProformaScreenState extends State<ProformaScreen> {
                                   model: _modelController.text.toString(),
                                   peca: _pecaController.text.toString(),
                                   vinNumber:  _chassisController.text.toString(),
+                                  year: _yearController.text.toString(),
+                                  trim: _trimController.text.toString(),
                               );
                             }
                             catch (e) {
                               print (e);
                             }
+                            //Got to the Login Page.
+                            context.rootNavigator.push(Routes.loginView);
                           }
                           else
                             print ('One of the Values is Wrong');
                         }
-                        //Got to the Login Page.
-                        context.rootNavigator.push(Routes.loginView);
                       },
                     ),
                   ],
