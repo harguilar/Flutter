@@ -107,7 +107,8 @@ class CartTile extends StatelessWidget {
                 //Convert The Doc. From FireBase Into ProductData
                 cartProduct.productData = ProductData.fromDocument(snapshot.data);
                return _buildContent();
-              } else {
+              }
+              else {
                 return Container(
                   height:  70.0,
                   child: CircularProgressIndicator(),

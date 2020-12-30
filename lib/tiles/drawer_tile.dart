@@ -32,7 +32,6 @@ class DrawerTile extends StatelessWidget {
                 color: controller.page.round() == page ?
                     //Give it The Primary Color otherwise give it grey.
                     Theme.of(context).primaryColor : Colors.grey[700],
-
               ),
               SizedBox(width: 32.0,),
               Text(
@@ -48,7 +47,6 @@ class DrawerTile extends StatelessWidget {
           ),
         ),
       ),
-
     );
   }
 }

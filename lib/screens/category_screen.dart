@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jeilaonlinestore/datas/products_data.dart';
 import 'package:jeilaonlinestore/models/cart_model.dart';
-import 'package:jeilaonlinestore/screens/cart_screen.dart';
 import 'package:jeilaonlinestore/tiles/product_tile.dart';
 import 'package:scoped_model/scoped_model.dart';
 class CategoryScreen extends StatelessWidget {
@@ -90,6 +89,7 @@ class CategoryScreen extends StatelessWidget {
                         ProductData data = ProductData.fromDocument(snapshot.data.documents[index]);
                         //Get the Category ID of the Product for later usage.
                         data.category = this.snapshot.documentID;
+                        //print (data.title);
                         return ProductTile('grid', data);
                       },
 

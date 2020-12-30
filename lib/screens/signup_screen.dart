@@ -136,7 +136,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     ));
     //Leave The main Screen After you finish creating the user.
     Future.delayed(Duration(seconds: 2)).then((value) => Navigator.of(context).pop());
-
   }
   void _onFail(){
       _scaffoldkey.currentState.showSnackBar(SnackBar

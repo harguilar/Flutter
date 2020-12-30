@@ -1,5 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:jeilaonlinestore/screens/signup_screen.dart';
 import 'package:jeilaonlinestore/tabs/home_tab.dart';
 import 'package:jeilaonlinestore/tabs/orders_tab.dart';
 import 'package:jeilaonlinestore/tabs/places_tabs.dart';
@@ -7,28 +7,25 @@ import 'package:jeilaonlinestore/tabs/products_tab.dart';
 import 'package:jeilaonlinestore/widgets/cart_button.dart';
 import 'package:jeilaonlinestore/widgets/customer_drawer.dart';
 
-import 'login_screen.dart';
+
 
 class HomeScreen extends StatelessWidget {
-  //we Create This to allow us navigative Between Pages.
+
+  //we Create This to allow us Navigate Between Pages.
   final _pageController = PageController();
+  String data;
   @override
   Widget build(BuildContext context) {
+
     return PageView(
+
       controller: _pageController,
       //This will allow us to control the page change through the code instead of dragging.
       physics: NeverScrollableScrollPhysics(),
+
       children: <Widget>[
         Scaffold(
-          appBar: AppBar(
-            //flexibleSpace: ,
-            //title: Text('Search App'),
-            actions: <Widget> [
-              IconButton(icon: Icon(Icons.search),onPressed: (){
-              },)
-            ],
-            //backgroundColor: Colors.transparent,
-          ),
+//
           body: HomeTab(),
           //We create a Drawer to slide us The information.
           drawer: CustomDrawer(_pageController),
@@ -36,6 +33,7 @@ class HomeScreen extends StatelessWidget {
           floatingActionButton: CartButton(),
         ),
         //Create Another Pages
+
         Scaffold(
           appBar: AppBar(
             title: Text('Productos'),
@@ -69,3 +67,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+
+
+

@@ -2,7 +2,6 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:jeilaonlinestore/datas/cart_product.dart';
 import 'package:jeilaonlinestore/datas/products_data.dart';
-import 'package:carousel_pro/carousel_pro.dart';
 import 'package:jeilaonlinestore/models/cart_model.dart';
 import 'package:jeilaonlinestore/models/user_model.dart';
 import 'package:jeilaonlinestore/screens/login_screen.dart';
@@ -21,9 +20,6 @@ class _ProductScreenState extends State<ProductScreen> {
   //And Pass the Product as Parameter to allow us to use throughout the Entire State.
   final ProductData product;
   String s;
-
-
-
   _ProductScreenState(this.product);
   @override
   Widget build(BuildContext context) {
@@ -122,7 +118,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         },
                         child: Container(
                           //This defines all the Parameters with the Box and Borders
-                          decoration: BoxDecoration(
+                            decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(4.0)),
                             border: Border.all(
                               //Check The Size and Define the Color.
@@ -146,6 +142,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     //Disable The Button if size was not selected.
                     onPressed: s != null? (){
                       if (UserModel.of(context).isLoggedIn()){
+
                         //Adiciona ao Carrinho
                         CartProduct cartProduct = CartProduct();
                         //set the Size
@@ -198,8 +195,4 @@ class _ProductScreenState extends State<ProductScreen> {
     );
   }
 }
-/*
- product.sizes.map((size){
 
-                      })
- */

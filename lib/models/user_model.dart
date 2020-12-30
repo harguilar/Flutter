@@ -21,12 +21,14 @@ class UserModel extends Model{
   }
 
   FirebaseAuth _auth = FirebaseAuth.instance;
+
   //Define the User that will be logged in.
   FirebaseUser firebaseUser;
 
   //Define THe user details in the Form .
   Map <String, dynamic> userData = Map();
   //@required make is easier for us on function call it will
+
   // force us to call the function with all its parameters.
 
   void signUp({@required Map <String, dynamic> userData, @required String pass,
@@ -68,7 +70,7 @@ class UserModel extends Model{
 
    // signOut();
 
-    isLoading = true;
+    //isLoading = true;
     notifyListeners();
 
     //Sign in with Email and Password.
@@ -92,7 +94,6 @@ class UserModel extends Model{
   }
   void recoverPass(String email) {
     _auth.sendPasswordResetEmail(email: email);
-
   }
 
   void signOut() async{
@@ -109,8 +110,8 @@ class UserModel extends Model{
     //check to see if the User is logged in
     //FirebaseUser = userData['name'];
     return firebaseUser !=null;
-
   }
+
 //Create a User Data Method to Store User info
   Future<Null> _saveUserData(Map<String, dynamic> userData) async{
     this.userData = userData;
@@ -127,8 +128,7 @@ class UserModel extends Model{
         //Check if user Data is not empty
         if(userData['name'] == null){
           //Get the User from Firestore
-          DocumentSnapshot docUser =
-              await Firestore.instance.collection('users').document(firebaseUser.uid).get();
+          DocumentSnapshot docUser = await Firestore.instance.collection('users').document(firebaseUser.uid).get();
           //Assign User to Userdata
           userData = docUser.data;
         }

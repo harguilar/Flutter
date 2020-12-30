@@ -15,17 +15,18 @@ class CustomDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     //This Widget is to give nice Colour of the top heading
     Widget _buildDrawerBack () => Container(
-      decoration: BoxDecoration(
+/*      decoration: BoxDecoration(
         gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(255, 203, 236, 241),
-              Colors.white,
-            ],
-            //Now Lets say the gradient will start on top left and finish on bottom right
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+          begin: Alignment.topLeft,
+          end:
+          Alignment(0.8, 0.0), // 10% of the width, so there are ten blinds.
+          colors: [
+            const Color(0xffee0000),
+            const Color(0xffeeee00)
+          ], // red to yellow
+          //tileMode: TileMode.repeated, // repeats the gradient over the canvas
         ),
-      ),
+      ),*/
     );
     //Lets Return a Drawer cz we are creating one.
     return Drawer(

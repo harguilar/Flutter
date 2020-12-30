@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:jeilaonlinestore/screens/category_screen.dart';
 
 class ProductData {
   String category;
@@ -18,6 +17,9 @@ class ProductData {
       //Force The Price To Always be a Double.
       price = (snapshot.data['price'] + .0);
       images = snapshot.data['images'];
+      //Get the name for the Search.
+     // DataSearch();
+      //print (title);
       sizes = snapshot.data['sizes'];
     }
     catch (e){

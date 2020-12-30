@@ -16,8 +16,7 @@ class CartModel extends Model{
   //Create a List of Products.
   List<CartProduct> products = [];
   bool isLoading = false;
-
-
+  
   //Create the Constructor with user
   CartModel(this.user) {
     //Load my Items if am Logged in.
@@ -149,8 +148,6 @@ class CartModel extends Model{
 
     //return the Document reference so that the User get notified
     return refOrder.documentID;
-
-
 
   }
   //Get all Information for the Cart.

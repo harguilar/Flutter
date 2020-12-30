@@ -40,8 +40,8 @@ class ProductTile extends StatelessWidget {
                         style: TextStyle(
                           fontWeight: FontWeight.w500
                         ),
-
                       ),
+
                       //THE 2 THERE IS TO DEFINE DECIMAL PLACES
                       Text("AKZ\ ${product.price.toStringAsFixed(2)}",
                         style: TextStyle(
@@ -57,8 +57,8 @@ class ProductTile extends StatelessWidget {
               ),
             ],
           )
-          : Row(
 
+          : Row(
               children: <Widget>[
                 //Create a Flexible to ensure that the Images space
                 //Is Equal the space where the Price is.
@@ -69,7 +69,6 @@ class ProductTile extends StatelessWidget {
                       fit: BoxFit.cover,
                        height: 250.0,
                    ),
-
                 ),
 
                 Flexible(

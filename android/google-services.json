@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "102651650408",
+    "firebase_url": "https://jeila-72c94.firebaseio.com",
+    "project_id": "jeila-72c94",
+    "storage_bucket": "jeila-72c94.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102651650408:android:7a752ce156deef8d76f6dd",
+        "android_client_info": {
+          "package_name": "techub.co.jeilaonlinestore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "102651650408-mpq1f55vese4ko5fenghhdhc4po1diei.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTm6YmztESVd0fRsefS9A8WQNT1b0Bkps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "102651650408-mpq1f55vese4ko5fenghhdhc4po1diei.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "102651650408-gcaft6j0tobmaa0qoll0sd8j44m8lrbr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "techub.co.jeilaonlinestore"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
